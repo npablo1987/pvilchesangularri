@@ -14,6 +14,15 @@
   padding: 0px 30px;
 }
 
+// estilos de validación para RUT
+:host ::ng-deep app-input-text.input-success .text-input {
+  border-color: #28a745;
+}
+
+:host ::ng-deep app-input-text.input-error .text-input {
+  border-color: #fb3b3b;
+}
+
 
 .label-1 {
   font-family: "Roboto Slab", serif;
