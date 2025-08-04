@@ -1,0 +1,104 @@
+<app-header></app-header>
+<div class="formulario-proyectos-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <span>Editar proyecto</span>
+  <app-title [title]="nombreProyecto" [subtitle]="descripcionProyecto" [boton]="'formularioProyectos'" (onEditarProyecto)="editarProyecto()"></app-title>
+
+  <p-tabView [(activeIndex)]="activeTabIndex">
+    <p-tabPanel header="General">
+      <app-general-tab-estudio [generalDataRevisar]="datosGenerales"></app-general-tab-estudio>
+    </p-tabPanel>
+    <p-tabPanel header="Legal">
+      <app-legal-tab-estudio></app-legal-tab-estudio>
+    </p-tabPanel>
+    <p-tabPanel header="Técnico">
+      <app-tecnico-tab-estudio></app-tecnico-tab-estudio>
+    </p-tabPanel>
+    <p-tabPanel header="Presupuesto">
+      <app-presupuesto-tab-estudio  (presupuestoEmitido)="manejarPresupuesto($event)"></app-presupuesto-tab-estudio>
+    </p-tabPanel>
+    <p-tabPanel header="Evaluacion" *ngIf="esRutaAsignado">
+      <app-evaluacion-tab-estudio 
+      ></app-evaluacion-tab-estudio>
+    </p-tabPanel>
+  </p-tabView>
+  <p-divider />
+  <div class="fila-datos" style="display: flex; justify-content: space-between;">
+    <div class="button-new" *ngIf="!esRutaAsignado; else evaluacion">
+      <button class="botones" (click)="guardarYVolver()">
+        <i class="pi pi-caret-left"></i> Guardar y Volver
+      </button> 
+    </div>
+    <ng-template #evaluacion>
+      <div class="button-new">
+        <button class="botones" (click)="guardarYVolver()">
+          <i class="pi pi-caret-left"></i> Volver
+        </button> 
+      </div>
+    </ng-template>
+    <div class="button-crear-demanda" *ngIf="!esRutaAsignado">
+      <button class="button-demanda" (click)="guardarProyecto()">
+        <i class="pi pi-save" style="margin-right: 10px;"></i> Guardar Proyecto
+      </button>
+    </div>
+  </div>    
+</div>
+
+<p-dialog header="Proyecto" [(visible)]="displayDialog" modal="modal" [closable]="true" [style]="{ width: '33rem', height: 'auto' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Proyecto</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+
+  <div class="columna-revision" style="padding: 0px;">
+    <div class="fila-revision">
+        <div class="columna-revision">
+          <label>Usuario</label>
+          <span>{{ nombreUsuarioDemanda }} ({{ rutUsuarioDemanda }})</span>
+        </div>
+      </div>
+      <div class="fila-revision">
+        <div class="columna-revision">
+          <label>N° Demanda</label>
+          <span>{{ respuestaNumeroDemanda}}
+            <app-chip [text]="estadoDemanda" [color]="chipColor"></app-chip>
+          </span>
+        </div>
+        <div class="columna-revision">
+          <label>Instrumento</label>
+          <span>{{ instrumentoDemanda }}</span>
+        </div>
+      </div>
+  </div>
+  
+  <div class="dialog-content">
+    <div class="mt-3" style="margin-top: 10px;">
+      <div style="display: flex; flex-direction: column; padding: 5px 0">
+      <label for="nombre-proyecto">Nombre del proyecto</label>
+      <input id="nombre-proyecto" class="text-input" type="text" [(ngModel)]="nombreProyecto"
+        placeholder="12.345.678_9_tecnificado_12" />
+    </div>     
+      <h4 class="subtitle-dialog">Descripción del proyecto</h4>
+      <textarea class="custom-textarea" [(ngModel)]="descripcionProyecto" rows="20" cols="30" 
+          placeholder="descripcion del proyecto"></textarea>
+    </div>
+ 
+    <div class="button-publish" style="margin-top: 10px;">
+      <button class="button-publicar" (click)="actualizarDatosDelProyecto()">
+        <i class="pi pi-save" style="padding-right: 10px;"></i> Guardar proyecto
+      </button>
+    </div>
+  </div>
+</p-dialog>
+
+<app-guardar-proyecto-dialog [display]="mostrarDialog" (dialogClosed)="onDialogClosed()"></app-guardar-proyecto-dialog>
+
+<app-confirmacion-dialog
+[display]="mostrarConfirmacion"
+[isSuccess]="esExito"
+[successMessage]="mensajeExito"
+[errorMessage]="mensajeError"
+(onConfirm)="onConfirmar()"
+(onClose)="onCerrar()"
+></app-confirmacion-dialog>

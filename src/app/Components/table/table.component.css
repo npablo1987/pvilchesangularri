@@ -1,0 +1,185 @@
+.table-grid-area { 
+  display: flex;
+  flex-direction: column;
+  padding: 12px 15px;
+  grid-area: table;
+}
+
+a {
+  float: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--Primario-Darken-1, #0051A8);
+  text-decoration: none;
+  padding: 7px;
+  cursor: pointer;
+}
+
+.table-link { 
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--Primario-Darken-1, #0051A8);
+  line-height: 28px;
+  text-align: left;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: green !important;
+}
+
+.table-striped .p-datatable-tbody > tr:last-child,
+.my-table .p-datatable-tbody {
+  border-bottom: 2px solid black;
+}
+
+.my-table-striped .p-table-tbody > tr {
+  background-color: red !important;
+}
+
+:host ::ng-deep .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #CFE1F3;
+}
+
+:host ::ng-deep tbody, th {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+.pi-caret-right {
+  color: #0051A8;
+  width: 24px;
+}
+
+.all-callings {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 2px solid black;
+}
+
+.pi {
+  font-size: 0.8rem;  
+}
+
+.boton-busqueda {
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+:host ::ng-deep .p-datatable-header {
+  background-color: white;
+  border: 0px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container .pi-search {
+  position: absolute;
+  left: 10px;
+  color: #0F69C4;
+}
+
+.input-container input {
+  padding-left: 30px;
+}
+
+label {
+  padding-top: 7px;
+  margin-right: 10px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  padding: 1rem 0px;
+}
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+  justify-content: end;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #0051A8;
+  color: white;
+}
+
+
+.additional-links {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+}
+
+.additional-links a {
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: #0051A8;
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.additional-links a i {
+  margin-right: 5px;
+}
+
+.additional-links a:hover {
+  text-decoration: none;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  border: 2px solid #FFA11B;
+  opacity: 1;
+}
+
+.descripcion {
+  text-align: left;
+  margin: 10px 10px;
+  width: 100%;
+}
+
+.pi-exclamation-triangle {
+  padding-top: 5px;
+  color: #FFA11B;
+  width: 30px;
+  font-size: 25px;
+}
+
+.no-data {
+  text-align: center;
+  padding: 10px;
+  color: #666;
+}

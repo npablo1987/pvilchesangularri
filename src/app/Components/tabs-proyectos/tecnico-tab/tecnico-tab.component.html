@@ -1,0 +1,757 @@
+<div style="width: 1140px">
+  <div class="fila-datos" style="padding: 40px 0 0 15px">
+    <span class="titulo">Antecedentes técnicos</span>
+  </div>
+
+  <div style="margin-top: 40px">
+    <div class="fila-datos" style="padding: 0 15px">
+      <div class="columna-datos">
+        <span class="subtitulo" style="padding-bottom: 5px"
+          >Georeferenciación</span
+        >
+        <span class="subTexto" style="width: 457px; margin-bottom: 20px">{{
+          textoGeoreferenciacion
+        }}</span>
+        <app-buttons
+          [label]="'Buscar en el mapa'"
+          [icon]="'pi pi-map-marker'"
+          [action]="buscarMapa.bind(this)"
+        ></app-buttons>
+        <div style="margin-top: 20px">
+          <input
+            class="text-input"
+            type="text"
+            [(ngModel)]="coordenadas"
+            [disabled]="true"
+            [placeholder]="'-18.417557789731365,-70.29701184374956'"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="fila-datos" style="padding: 40px 0 20px 15px">
+      <span class="titulo">Uso actual del suelo</span>
+      <span class="subTexto" style="padding-left: 5px">(Sin proyecto)</span>
+    </div>
+    <div class="fila-datos" style="padding: 0 0 5px 15px">
+      <label
+        >¿El uso actual del suelo es agrícola (cultivos, frutales,
+        praderas)?</label
+      >
+    </div>
+    <div class="fila-datos" style="padding: 0 0 20px 15px">
+      <br />
+      <p-radioButton
+        name="sueloAgricolaOpcion"
+        [value]="true"
+        [(ngModel)]="sueloAgricola"
+      ></p-radioButton>
+      <span class="font-level-7" style="padding-right: 10px"> Si </span>
+      <br />
+      <p-radioButton
+        name="sueloAgricolaOpcion"
+        [value]="false"
+        [(ngModel)]="sueloAgricola"
+      ></p-radioButton>
+      <span class="font-level-7"> No </span>
+    </div>
+    <div *ngIf="sueloAgricola">
+      <label style="padding: 20px 0 0 15px">Cultivos</label>
+      <ng-container *ngFor="let cultivo of cultivos; let i = index">
+        <div class="fila-datos" style="padding-left: 15px; padding-top: 15px">
+          <p-card class="card-con-boton-quitar">
+            <div class="card-content">
+              <div class="fila-datos">
+                <div class="columna-datos" style="padding: 0 20px">
+                  <label>Rubro</label>
+                  <p-dropdown
+                    [options]="rubroOpciones"
+                    [(ngModel)]="cultivo.rubro"
+                    (onChange)="onRubroSeleccionadoDinamico(i)"
+                    optionLabel="rubro"
+                    placeholder="Seleccione"
+                  />
+                </div>
+
+                <div class="columna-datos" style="padding: 0 20px">
+                  <label>Especie</label>
+                  <p-dropdown
+                    [options]="cultivo.especieOpciones"
+                    [(ngModel)]="cultivo.especie"
+                    (onChange)="onEspecieSeleccionadaDinamico(i)"
+                    optionLabel="especie"
+                    placeholder="Seleccione"
+                  />
+                </div>
+                <div class="columna-datos" style="padding: 0 20px">
+                  <label>Superficie</label>
+                  <app-input-number
+                    [placeholder]="'0.5'"
+                    [(value)]="cultivo.superficie"
+                    [disable]="false"
+                    [inputId]="'superficie-' + i"
+                    [useFormControl]="false"
+                  ></app-input-number>
+                </div>
+
+                <div class="columna-datos" style="padding: 0 20px">
+                  <label>U. Medida</label>
+                  <p-dropdown
+                    [options]="cultivo.unidadOpciones"
+                    [(ngModel)]="cultivo.unidadMedida"
+                    optionLabel="unidadMedida"
+                    placeholder="Seleccione"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="boton-quitar-container" *ngIf="cultivos.length > 1">
+              <button (click)="quitarCultivo(i)" class="boton-quitar">
+                <i class="pi pi-trash" style="color: red"></i> Quitar
+              </button>
+            </div>
+          </p-card>
+        </div>
+      </ng-container>
+      <div class="fila-datos" style="padding: 10px 0 20px 15px">
+        <a
+          (click)="agregarCultivo()"
+          style="color: #0046bb; cursor: pointer; font-weight: bold"
+        >
+          + Agregar Cultivo
+        </a>
+      </div>
+    </div>
+
+    <div class="fila-datos" style="padding: 0 0 10px 15px">
+      <div class="columna-datos" style="padding: 0 20px">
+        <label style="width: 280px">¿Riega?</label>
+        <div class="fila-datos-radio-button">
+          <p-radioButton
+            name="preguntaRiega"
+            [value]="true"
+            [(ngModel)]="riega"
+          ></p-radioButton>
+          <span class="font-level-7" style="padding-right: 10px"> Si </span>
+          <br />
+          <p-radioButton
+            name="preguntaRiega"
+            [value]="false"
+            [(ngModel)]="riega"
+          ></p-radioButton>
+          <span class="font-level-7"> No </span>
+        </div>
+      </div>
+
+      <div class="columna-datos" style="padding: 0 20px" *ngIf="riega">
+        <label for="intrumento-concurso">Método de riego</label>
+        <p-dropdown
+          class="dropdown-xl"
+          [options]="metodoRiegoOpciones"
+          [(ngModel)]="metodoRiego"
+          optionLabel="name"
+          placeholder="Seleccione"
+        />
+      </div>
+
+      <div class="columna-datos" style="padding: 0 15px" *ngIf="riega">
+        <label>Fuente de energía</label>
+        <div>
+          <p-dropdown
+            class="dropdown-large"
+            [options]="groupedTipoFuente"
+            [(ngModel)]="selectedTipoFuente"
+            placeholder="Seleccione un tipo de Fuente"
+            [group]="true"
+            (onChange)="handleDropdownChangeTipoFuente($event)"
+          >
+            <ng-template let-group pTemplate="group">
+              <div class="flex align-items-center">
+                <span>{{ group.label }}</span>
+              </div>
+            </ng-template>
+          </p-dropdown>
+        </div>
+
+        <!-- Mostrar input si el valor seleccionado es "otro" -->
+        <!-- <div *ngIf="selectedTipoFuente === 'Otro' || selectedTipoFuente === 'Otra'" class="input-container">
+          <input type="text" [(ngModel)]="tipoFuenteInput" placeholder="Escriba el tipo de fuente" class="custom-input text-input">
+          <button (click)="clearOtroTipoFuente()" class="clear-btn">x</button>
+        </div> -->
+      </div>
+      <!-- <div class="columna-datos" style="padding: 0 20px;">
+          <label for="intrumento-concurso">Fuente de energía</label>
+              <p-dropdown class="dropdown-xl" [options]="codigoAreaOptions" [(ngModel)]="fuenteEnergia" optionLabel="name"
+              placeholder="Seleccione"/>
+        </div> -->
+    </div>
+
+    <div class="fila-datos" style="padding: 0 0 5px 15px">
+      <div class="columna-datos" style="padding: 0 20px">
+        <label style="width: 280px">¿Cuenta con acumulador de agua?</label>
+        <div class="fila-datos-radio-button">
+          <p-radioButton
+            name="acomuladorAguas"
+            [value]="true"
+            [(ngModel)]="acomuladorDeAgua"
+          ></p-radioButton>
+          <span class="font-level-7" style="padding-right: 10px"> Si </span>
+          <br />
+          <p-radioButton
+            name="acomuladorAguas"
+            [value]="false"
+            [(ngModel)]="acomuladorDeAgua"
+          ></p-radioButton>
+          <span class="font-level-7"> No </span>
+        </div>
+      </div>
+      <div
+        class="columna-datos"
+        style="padding: 0 20px"
+        *ngIf="acomuladorDeAgua"
+      >
+        <label>Capacidad (m3)</label>
+        <app-input-number
+          style="width: 358px"
+          [placeholder]="'3000'"
+          [(value)]="capacidadMetrosCubicos"
+          [disable]="false"
+          [inputId]="'capacidadInput'"
+          [useFormControl]="false"
+          [tipo]="'CLP'"
+        >
+        </app-input-number>
+      </div>
+    </div>
+
+    <div class="fila-datos" style="padding: 40px 0 20px 15px">
+      <span class="titulo">Uso futuro del suelo</span>
+      <span class="subTexto" style="padding-left: 5px">(Sin proyecto)</span>
+    </div>
+    <label style="padding: 20px 0 0 15px">Cultivos</label>
+    <ng-container *ngFor="let cultivo of cultivosFuturos; let i = index">
+      <div class="fila-datos" style="padding-left: 15px; padding-top: 15px">
+        <p-card class="card-con-boton-quitar">
+          <div class="card-content">
+            <div class="fila-datos">
+              <div class="columna-datos" style="padding: 0 20px">
+                <label>Rubro</label>
+                <p-dropdown
+                  [options]="rubroOpcionesFuturo"
+                  [(ngModel)]="cultivo.rubro"
+                  (onChange)="onRubroSeleccionadoFuturoDinamico(i)"
+                  optionLabel="rubro"
+                  placeholder="Seleccione"
+                />
+              </div>
+              <div class="columna-datos" style="padding: 0 20px">
+                <label>Especie</label>
+                <p-dropdown
+                  [options]="cultivo.especieOpciones"
+                  [(ngModel)]="cultivo.especie"
+                  (onChange)="onEspecieSeleccionadaFuturoDinamico(i)"
+                  optionLabel="especie"
+                  placeholder="Seleccione"
+                />
+              </div>
+              <div class="columna-datos" style="padding: 0 20px">
+                <label>Superficie</label>
+                <app-input-number
+                  [placeholder]="'0.5'"
+                  [(value)]="cultivo.superficie"
+                  [disable]="false"
+                  [inputId]="'superficieFuturo-' + i"
+                  [useFormControl]="false"
+                ></app-input-number>
+              </div>
+              <div class="columna-datos" style="padding: 0 20px">
+                <label>U. Medida</label>
+                <p-dropdown
+                  [options]="cultivo.unidadOpciones"
+                  [(ngModel)]="cultivo.unidadMedida"
+                  optionLabel="unidadMedida"
+                  placeholder="Seleccione"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="boton-quitar-container"
+            *ngIf="cultivosFuturos.length > 1"
+          >
+            <button (click)="quitarCultivoFuturo(i)" class="boton-quitar">
+              <i class="pi pi-trash" style="color: red"></i> Quitar
+            </button>
+          </div>
+        </p-card>
+      </div>
+    </ng-container>
+
+    <div class="fila-datos" style="padding: 10px 0 20px 15px">
+      <a
+        (click)="agregarCultivoFuturo()"
+        style="color: #0046bb; cursor: pointer; font-weight: bold"
+      >
+        + Agregar Cultivo
+      </a>
+    </div>
+
+    <div class="fila-datos" style="padding: 0 0 10px 15px">
+      <app-input-number
+        style="width: 360px"
+        [placeholder]="'0.5'"
+        [(value)]="caudalMaximo"
+        [disable]="false"
+        [label]="'Caudal máximo de diseño (L/s)'"
+        [inputId]="'caudalMaxInput'"
+        [useFormControl]="false"
+      >
+      </app-input-number>
+    </div>
+    <label style="padding: 0 0 5px 15px">Tipo de inversión</label>
+    <div
+      class="fila-datos"
+      style="padding: 0 0 5px 15px"
+      *ngFor="let tipo of tipoInversiones"
+    >
+      <p-checkbox
+        [binary]="true"
+        [checked]="tipo.selected"
+        (onChange)="onCheckboxChange(tipo)"
+      >
+      </p-checkbox>
+      <span style="margin-left: 10px">{{ tipo.nombre | titlecase }}</span>
+    </div>
+    <!-- <div *ngIf="!esEditar"> -->
+    <!-- <app-tipo-inversion-selector
+        [tipoInversiones]="tipoInversiones"
+        [nombreTipoInversionSeleccionado]="tipoInversionExistente?.nombre"
+        (tipoInversionSeleccionada)="onTipoInversionSeleccionada($event)">
+      </app-tipo-inversion-selector> -->
+    <!-- </div>   -->
+  </div>
+
+  <div style="margin-top: 40px">
+    <div class="fila-datos">
+      <div class="columna-datos">
+        <label for="intrumento-concurso">Tipología</label>
+        <p-dropdown
+          class="dropdown-xl"
+          [options]="tipologiaOpciones"
+          [(ngModel)]="tipologiaSeleccionada"
+          optionLabel="tipologia"
+          placeholder="Seleccione"
+          (onChange)="onTipologiaSeleccionada($event)"
+        >
+        </p-dropdown>
+      </div>
+      <div class="columna-datos" style="padding-left: 15px; padding-top: 25px">
+        <label>{{ tamanioLabel }} ({{ unidadMedidaLabel }})</label>
+        <div style="display: flex; align-items: center">
+          <app-input-number
+            style="width: 320px"
+            [(value)]="tamanioValor"
+            [inputId]="'tamanoInput'"
+            [useFormControl]="false"
+          ></app-input-number>
+        </div>
+      </div>
+
+      <div
+        *ngIf="tipologiaSeleccionada?.tipologia === 'Otro'"
+        style="padding: 15px 0 0 15px"
+      >
+        <label>Descripción</label>
+        <input
+          type="text"
+          class="text-input"
+          [(ngModel)]="descripcionTipologiaOtra"
+          placeholder="Describe la tipología"
+        />
+      </div>
+      <div class="columna-datos" style="padding-left: 15px"></div>
+    </div>
+    <ng-container *ngIf="mostrarCampos1_1">
+      <div class="fila-datos" style="padding: 0 0 10px 15px">
+        <div class="columna-datos">
+          <label>Ancho (m/unidad)</label>
+          <app-input-number
+            [(value)]="ancho"
+            [disable]="false"
+            [inputId]="'anchoInput'"
+            [useFormControl]="false"
+            [placeholder]="'-'"
+            [style.width.px]="360"
+          ></app-input-number>
+        </div>
+        <div class="columna-datos" style="padding-left: 15px">
+          <label>Alto (m/unidad)</label>
+          <app-input-number
+            [(value)]="alto"
+            [disable]="false"
+            [inputId]="'altoInput'"
+            [useFormControl]="false"
+            [placeholder]="'-'"
+            [style.width.px]="360"
+          ></app-input-number>
+        </div>
+        <div class="columna-datos" style="padding-left: 15px">
+          <label>Largo (m/unidad)</label>
+          <app-input-number
+            style="width: 360px"
+            [placeholder]="'0.5'"
+            [(value)]="largo"
+            [disable]="false"
+            [inputId]="'largoInput'"
+            [useFormControl]="false"
+          >
+          </app-input-number>
+        </div>
+      </div>
+
+      <div class="fila-datos" style="padding: 0 0 20px 15px">
+        <div class="columna-datos" style="padding-left: 15px">
+          <label>Talud (z)</label>
+          <app-input-number
+            [(value)]="talud"
+            [inputId]="'talud'"
+            [useFormControl]="false"
+            [placeholder]="'-'"
+            [style.width.px]="360"
+          ></app-input-number>
+        </div>
+        <div class="columna-datos">
+          <label>Pendiente (%)</label>
+          <app-input-number
+            [(value)]="pendienteInclinacion"
+            [inputId]="'pendiente'"
+            [useFormControl]="false"
+            [tipo]="'porcentaje'"
+            [placeholder]="'-'"
+            [style.width.px]="360"
+          ></app-input-number>
+        </div>
+        <div class="columna-datos" style="padding-left: 15px">
+          <label>Caudal (m³/s)</label>
+          <app-input-number
+            [(value)]="caudal"
+            [inputId]="'caudalUnidad'"
+            [useFormControl]="false"
+            [placeholder]="'-'"
+            [style.width.px]="360"
+          ></app-input-number>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="mostrarCamposTuberia">
+    <div class="fila-datos" style="padding: 0 0 10px 15px">
+      <div class="columna-datos">
+        <label>Diámetro (m)</label>
+        <app-input-number
+          [(value)]="diametro"
+          [inputId]="'diametroInput'"
+          [useFormControl]="false"
+          [placeholder]="'-'"
+          [style.width.px]="360"
+        ></app-input-number>
+      </div>
+      <div class="columna-datos" style="padding-left: 15px">
+        <label>Caudal (m³/s)</label>
+        <app-input-number
+          [(value)]="caudal"
+          [inputId]="'caudalTuberiaInput'"
+          [useFormControl]="false"
+          [placeholder]="'-'"
+          [style.width.px]="360"
+        ></app-input-number>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="mostrarCampoProfundidad">
+    <div class="fila-datos" style="padding: 0 0 20px 15px">
+      <div class="columna-datos">
+        <label>Profundidad nivel estático (m)</label>
+        <app-input-number
+          [(value)]="profundidadNivelEstatico"
+          [inputId]="'profundidadNivelEstatico'"
+          [useFormControl]="false"
+          [placeholder]="'-'"
+          [style.width.px]="360"
+        ></app-input-number>
+      </div>
+    </div>
+  </ng-container>
+
+  <div style="margin-top: 40px">
+    <div class="columna-datos">
+      <label style="width: 280px"
+        >¿Su proyecto contempla inversión de energía?</label
+      >
+      <div class="fila-datos-radio-button">
+        <p-radioButton
+          name="invEnergia"
+          [value]="true"
+          [(ngModel)]="contemplaInversionEnergia"
+        ></p-radioButton>
+        <span style="padding-right: 10px"> Si </span><br />
+        <p-radioButton
+          name="invEnergia"
+          [value]="false"
+          [(ngModel)]="contemplaInversionEnergia"
+        ></p-radioButton>
+        <span> No </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="contemplaInversionEnergia" style="margin-top: 20px">
+    <div style="margin-top: 20px">
+      <div class="fila-datos">
+        <div class="columna-datos" style="padding: 0 15px">
+          <label>Fuente de energía</label>
+          <div>
+            <p-dropdown
+              [options]="fuenteEnergiaOptions"
+              [(ngModel)]="selectedFuenteEnergiaInversion"
+              optionLabel="label"
+              optionValue="value"
+              placeholder="Seleccione fuente de energía"
+              (onChange)="onFuenteEnergiaChange($event)"
+            ></p-dropdown>
+          </div>
+
+          <!-- Mostrar input si el valor seleccionado es "otro" -->
+          <!-- <div *ngIf="selectedTipoFuente === 'Otro' || selectedTipoFuente === 'Otra'" class="input-container">
+          <input type="text" [(ngModel)]="tipoFuenteInput" placeholder="Escriba el tipo de fuente" class="custom-input text-input">
+          <button (click)="clearOtroTipoFuente()" class="clear-btn">x</button>
+        </div> -->
+        </div>
+        <div class="columna-datos" style="padding: 0 15px">
+          <label>Tipo de fuente</label>
+          <div>
+            <p-dropdown
+              [options]="tipoFuenteDropdownOptions"
+              [(ngModel)]="selectedTipoFuenteInversion"
+              placeholder="Seleccione tipo de fuente"
+              [group]="true"
+              (onChange)="handleDropdownChangeTipoFuente($event)"
+            ></p-dropdown>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mostrar input si el valor seleccionado es "otro" -->
+      <!-- <div *ngIf="selectedTipoFuente === 'Otro' || selectedTipoFuente === 'Otra'" class="input-container">
+          <input type="text" [(ngModel)]="tipoFuenteInput" placeholder="Escriba el tipo de fuente" class="custom-input text-input">
+          <button (click)="clearOtroTipoFuente()" class="clear-btn">x</button>
+        </div> -->
+    </div>
+
+    <div class="fila-datos" *ngIf="selectedFuenteEnergiaInversion === 'ERNC'">
+      <div class="columna-datos" style="padding-top: 24px">
+        <app-input-number
+          style="width: 360px"
+          [(value)]="potenciaPeak"
+          [disable]="false"
+          [label]="'Potencia peak (Kw/Hp / unidad)'"
+          [inputId]="'potenciaPeakInput'"
+          [useFormControl]="false"
+        ></app-input-number>
+      </div>
+      <div class="columna-datos" style="padding-left: 15px">
+        <label>Configuración</label>
+        <p-dropdown
+          class="dropdown-xl"
+          [options]="configuracionOpciones"
+          [(ngModel)]="configuracion"
+          optionLabel="name"
+          placeholder="Seleccione"
+        ></p-dropdown>
+      </div>
+    </div>
+    <div class="fila-datos" style="padding: 30px 15px">
+      <div class="columna-datos" style="width: 450px">
+        <span class="titulo">Carpeta técnica</span>
+        <span class="subtitulo">Seleccionar archivo</span>
+        <span class="subTexto">Subir archivo máximo 5MB </span>
+        <div style="width: 100%; margin-top: 20px">
+          <input
+            type="file"
+            id="fileInput4"
+            accept=".pdf"
+            (change)="onFileSelected($event)"
+            hidden
+          />
+          <button class="botones" (click)="triggerFileInput()">
+            <div class="fila-datos">
+              <span>Elegir archivo</span>
+              <i class="pi pi-plus-circle"></i>
+            </div>
+          </button>
+        </div>
+        <div style="width: 100%; margin-top: 20px">
+          <button class="button-demanda" (click)="guardarArchivo()">
+            Guardar archivo <i class="pi pi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="columna-datos" style="width: 744px">
+        <p-table
+          [value]="listadoCarpetaTecnica"
+          styleClass="table-striped my-table"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="nombre" style="width: 16%">
+                Archivo <i class="pi pi-sort"></i>
+              </th>
+              <th pSortableColumn="acciones" style="width: 10%">
+                Acciones <i class="pi pi-sort"></i>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td style="width: 15%; padding-left: 8px">
+                {{ rowData.nombre }}
+              </td>
+              <td style="width: 10%; padding-left: 5px">
+                <a
+                  class="table-link"
+                  style="color: #ec313a"
+                  (click)="eliminarArchivo(rowData)"
+                >
+                  <i class="pi pi-trash"></i> Eliminar
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div class="fila-datos" style="padding: 30px 15px">
+      <div class="columna-datos" style="width: 450px">
+        <span class="titulo">Carpeta de planos</span>
+        <span class="subtitulo">Seleccionar archivo</span>
+        <span class="subTexto">Subir archivo máximo 5MB </span>
+        <div style="width: 100%; margin-top: 20px">
+          <input
+            type="file"
+            id="fileInput5"
+            accept=".pdf"
+            (change)="onFileSelected2($event)"
+            hidden
+          />
+          <button class="botones" (click)="triggerFileInput2()">
+            <div class="fila-datos">
+              <span>Elegir archivo</span>
+              <i class="pi pi-plus-circle"></i>
+            </div>
+          </button>
+        </div>
+        <div style="width: 100%; margin-top: 20px">
+          <button class="button-demanda" (click)="guardarArchivo2()">
+            Guardar archivo <i class="pi pi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="columna-datos" style="width: 744px">
+        <p-table
+          [value]="listadoCarpetaPlanos"
+          styleClass="table-striped my-table"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="nombre" style="width: 16%">
+                Archivo <i class="pi pi-sort"></i>
+              </th>
+              <th pSortableColumn="acciones" style="width: 10%">
+                Acciones <i class="pi pi-sort"></i>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td style="width: 15%; padding-left: 8px">
+                {{ rowData.nombre }}
+              </td>
+              <td style="width: 10%; padding-left: 5px">
+                <a
+                  class="table-link"
+                  style="color: #ec313a"
+                  (click)="eliminarArchivo2(rowData)"
+                >
+                  <i class="pi pi-trash"></i> Eliminar
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+    <div class="fila-datos" style="padding: 30px 15px">
+      <div class="columna-datos" style="width: 450px">
+        <span class="titulo">Boleta eléctrica</span>
+        <span class="subtitulo">Seleccionar archivo</span>
+        <span class="subTexto">Subir archivo máximo 5MB </span>
+        <div style="width: 100%; margin-top: 20px">
+          <input
+            type="file"
+            id="fileInput6"
+            accept=".pdf"
+            (change)="onFileSelected3($event)"
+            hidden
+          />
+          <button class="botones" (click)="triggerFileInput3()">
+            <div class="fila-datos">
+              <span>Elegir archivo</span>
+              <i class="pi pi-plus-circle"></i>
+            </div>
+          </button>
+        </div>
+        <div style="width: 100%; margin-top: 20px">
+          <button class="button-demanda" (click)="guardarArchivo3()">
+            Guardar archivo <i class="pi pi-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+      <div class="columna-datos" style="width: 744px">
+        <p-table
+          [value]="listadoCarpetaElectrica"
+          styleClass="table-striped my-table"
+        >
+          <ng-template pTemplate="header">
+            <tr>
+              <th pSortableColumn="nombre" style="width: 16%">
+                Archivo <i class="pi pi-sort"></i>
+              </th>
+              <th pSortableColumn="acciones" style="width: 10%">
+                Acciones <i class="pi pi-sort"></i>
+              </th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData>
+            <tr>
+              <td style="width: 15%; padding-left: 8px">
+                {{ rowData.nombre }}
+              </td>
+              <td style="width: 10%; padding-left: 5px">
+                <a
+                  class="table-link"
+                  style="color: #ec313a"
+                  (click)="eliminarArchivo3(rowData)"
+                >
+                  <i class="pi pi-trash"></i> Eliminar
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+</div>

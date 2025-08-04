@@ -1,0 +1,50 @@
+<p-dialog header="Proyecto" [visible]="displayDialog" (onHide)="cerrarDialogo()" modal="modal" [closable]="true" [style]="{ width: '36rem', height: '33rem' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Asignar proyecto</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+
+  <div class="fila-revision">
+    <div class="columna-revision">
+      <label>Nombre del proyecto</label>
+      <span>{{ nombreProyecto }}</span>
+    </div>    
+  </div>
+  <div class="fila-revision">
+    <div class="columna-revision" style="padding-right: 10px;">
+      <label>Región</label>
+      <span>{{ regionProyecto }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>Comuna</label>
+      <span>{{ comunaProyecto }}</span>
+    </div>
+  </div>
+
+    <div class="fila-revision">
+      <div class="columna-revision">
+        <label for="intrumento-concurso">Asignar revisión del proyecto a</label>
+        <p-dropdown class="dropdown-xl" [options]="usuariosAsignacionOptions" [(ngModel)]="selectedUsuarioAsignacion" optionLabel="nombre"
+        placeholder=""/>
+      </div>
+    </div>
+  
+  <div class="dialog-content">
+ 
+    <div class="button-publish" style="margin-top: 20px;">
+      <button class="button-publicar" (click)="guardarAsignacion()">
+       Asignar proyecto <i class="pi pi-angle-right" style="padding-left: 10px;"></i>
+      </button>
+    </div>
+  </div>
+</p-dialog>
+
+<app-confirmacion-dialog
+  [display]="mostrarDialog"
+  [isSuccess]="esExito"
+  [successMessage]="'Se ha asignado correctamente el proyecto.'"
+  [errorMessage]="'No se puede asignar el mismo usuario para su revisión.'"
+  (onConfirm)="onConfirmar()"
+  (onClose)="onCerrar()"
+></app-confirmacion-dialog>

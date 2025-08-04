@@ -1,0 +1,39 @@
+<p-dialog header="Guardar proyecto" [(visible)]="display" modal="modal" [closable]="true" [style]="{ width: '34rem' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Guardar proyecto</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+  
+  <div class="dialog-content">
+
+    <div>
+      <div *ngIf="!formularioIncompleto" class="custom-message">
+        <div class="icon-container">
+          <i class="pi pi-info-circle"></i>
+        </div>
+        <div class="text-container">
+          Se ha guardado correctamente el proyecto.
+        </div>
+      </div>
+
+      <div *ngIf="formularioIncompleto" class="custom-message error-message">
+        <div class="icon-container">
+          <i class="pi pi-exclamation-circle"></i>
+        </div>
+        <div class="text-container">
+          El formulario no está completo. Verifica los campos requeridos.
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; padding-top: 20px;">
+        <button class="botones" (click)="salir()">
+          <i class="pi pi-caret-left" style="padding-right: 10px;"></i> Salir
+        </button> 
+        <button class="button-publicar" (click)="guardarProyecto()">
+          Postular proyecto <i class="pi pi-caret-right" style="padding-left: 10px;"></i> 
+        </button>
+    </div>
+  </div>
+</p-dialog>

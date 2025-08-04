@@ -1,0 +1,21 @@
+<p-dialog header="Proyecto" [(visible)]="displayDialog" modal="modal" [closable]="true" [style]="{ width: '28rem' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Priorización previa</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+
+  <div class="fila-revision">
+    <span class="font-level-7">Se realizará la priorización previa de los proyectos del comité de acuerdo a su puntaje y recomendación del evaluador.</span>
+  </div>
+
+  <div class="dialog-content">
+ 
+    <div class="button-publish" style="margin-top: 20px;">
+      <button class="button-publicar" (click)="guardarEvaluacion()">
+       Guardar Priorización <i class="pi pi-angle-right" style="padding-left: 10px;"></i>
+      </button>
+    </div>
+  </div>
+</p-dialog>
+

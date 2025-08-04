@@ -1,0 +1,22 @@
+<app-header></app-header>
+<div class="confirmacion-demanda-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Postular proyecto de riego'"></app-title>
+  <div class="card-detail" style="width: 60%; margin-left: 10px;">
+    <div class="icono"><img src="assets/InfoGreen.png" alt="Info" /></div>
+    <div class="descripcion" style="padding-left: 5px;">
+      <span>
+        El proyecto de riego para <span class="black-text">
+          {{ nombrePostulante }} ({{ rutPostulante }}) 
+        </span>
+        se ha postulado exitosamente.
+      </span>
+    </div>
+  </div>
+  <div class="row">
+    <div style="padding-left: 25px;">
+      <app-buttons [label]="'Comprobante de postulación'" [icon]="'pi pi-download'" [action]="descargarComprobantePostulacion.bind(this)"></app-buttons>
+    </div>
+  </div>
+  <a href="proyectos-home">Ver todos los proyectos</a>
+</div>

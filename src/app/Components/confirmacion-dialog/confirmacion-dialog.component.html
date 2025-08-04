@@ -1,0 +1,40 @@
+<p-dialog header="Confirmacion" [(visible)]="display" modal="modal" [closable]="true" [style]="{ width: '34rem' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Confirmacion</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+
+  <div class="dialog-content">
+    <div>
+      <!-- Mensaje de éxito -->
+      <div *ngIf="isSuccess" class="custom-message">
+        <div class="icon-container">
+          <i class="pi pi-info-circle"></i>
+        </div>
+        <div class="text-container">
+          {{ successMessage }}
+        </div>
+      </div>
+
+      <!-- Mensaje de error -->
+      <div *ngIf="!isSuccess" class="custom-message error-message">
+        <div class="icon-container">
+          <i class="pi pi-exclamation-circle"></i>
+        </div>
+        <div class="text-container">
+          {{ errorMessage }}
+        </div>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; padding-top: 20px;">
+      <button class="botones" (click)="salir()">
+        <i class="pi pi-caret-left" style="padding-right: 10px;"></i> Salir
+      </button>
+      <button class="button-publicar" (click)="confirmar()">
+        Confirmar <i class="pi pi-caret-right" style="padding-left: 10px;"></i>
+      </button>
+    </div>
+  </div>
+</p-dialog>

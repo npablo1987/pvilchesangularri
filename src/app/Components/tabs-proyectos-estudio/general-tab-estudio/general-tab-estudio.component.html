@@ -1,0 +1,432 @@
+<!-- Antecedentes Postulante -->
+<div class="fila-revision">
+  <span class="titulo" >Antecedentes del postulante</span>
+</div>
+<div>
+  <div class="fila-revision">
+    <span class="subtitulo">Datos básicos</span>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-revision">
+      <label>Postulante</label>
+      <span class="subTexto">{{ nombrePostulante }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>RUT</label>
+      <span class="subTexto">{{ rutPostulante }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>Situación crediticia</label>
+      <span class="textoValidacion">{{ estadoVigencia }}</span>
+    </div>
+    <div class="columna-revision">
+    </div>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-revision">
+      <label>RUT Representante</label>
+      <span class="subTexto">{{ rutRepresentante }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>Nombre Representante</label>
+      <span class="subTexto">{{ nombreRepresentante }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>Estado acreditación</label>
+      <span class="textoValidacion">{{ estadoAcreditacion }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>Rendiciones pendientes</label>
+      <span class="textoValidacion">{{ rendicionesPendientes }}</span>
+    </div>
+  </div>
+</div>
+<div *ngIf="tipoUsuarioPostulante !== 'Persona Natural'" style="margin-top: 40px;">
+  <div  class="fila-revision">
+    <span class="subtitulo">Datos integrantes</span>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-revision">
+      <label>Nº Beneficiarios hombres</label>
+      <span class="subTexto">8</span>
+    </div>
+    <div class="columna-revision">
+      <label>Nº Beneficiarios mujeres</label>
+      <span class="subTexto">5</span>
+    </div>
+    <div class="columna-revision">
+      <label>Nº Beneficiarios total</label>
+      <span class="subTexto">13</span>
+    </div>
+    <div class="columna-revision">
+      <app-buttons [label]="'Ver integrantes'" [icon]="'pi pi-users'" [action]="verIntegrantes.bind(this)"></app-buttons>
+    </div>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-revision">
+      <label style="width: 200px;">Nº Beneficiarios (usuarios INDAP) hombres</label>
+      <span class="subTexto">8</span>
+    </div>
+    <div class="columna-revision">
+      <label style="width: 200px;">Nº Beneficiarios (usuarios INDAP) mujeres</label>
+      <span class="subTexto">5</span>
+    </div>
+    <div class="columna-revision">
+      <label style="width: 200px;">Nº Beneficiarios (usuarios INDAP) total</label>
+      <span class="subTexto">13</span>
+    </div>
+    <div class="columna-revision">
+    </div>
+  </div>
+</div>
+<div style="margin-top: 40px;">
+  <div class="fila-revision">
+    <span class="subtitulo">Datos de contacto</span>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-datos">
+      <label for="intrumento-concurso">Cod. Área</label>
+      <p-dropdown class="dropdown-small" [options]="codigoAreaOptions" [(ngModel)]="selectedCodigoAreaPostulante" optionLabel="nombre"
+      placeholder="Seleccione"/>
+    </div>
+    <div class="columna-datos" style="padding-left: 15px;">
+      <app-input-text style="width: 240px; padding-top: 25px;" [placeholder]="'Ingresar número'" [(value)]="numeroContactoPostulante" [disable]="false"
+      [label]="'Número'" [inputId]="'numeroInput'" [useFormControl]="false">
+    </app-input-text>
+  </div>
+  <div class="columna-datos" style="padding-left: 15px;">
+    <label for="intrumento-concurso">Tipo teléfono</label>
+    <p-dropdown class="dropdown-small" [options]="tipoTelefonoOpciones" [(ngModel)]="selectedTipoTelefonoPostulante" optionLabel="tipoTelefono"
+    placeholder="Seleccione"/>
+  </div>
+  <div class="columna-datos" style="padding-left: 15px;">
+    <label>Whatsapp</label>
+    <div class="fila-datos">
+      <p-checkbox
+      id="whatsappCheckbox"
+      [value]="esWhatsappPostulante"
+      [(ngModel)]="esWhatsappPostulante"
+      (onChange)="onCheckboxWhatsappChange()"
+      binary="true">
+    </p-checkbox>
+    <label for="whatsappCheckbox" style="margin-left: 5px; padding-top: 5px;">Es teléfono con WhatsApp</label>
+  </div>
+</div>
+<div class="columna-datos" style="padding: 10px 0 0 60px;">
+  <app-buttons [label]="'Agregar'" [icon]="'pi pi-plus'" [action]="agregarContactoPostulante.bind(this)"></app-buttons>
+</div>
+</div>
+<div style="padding-left: 15px;">
+  <p-table [value]="dataContactosPostulante" styleClass="table-striped my-table">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="usuario" style="width: 16%;">Código de área <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="rut" style="width: 10%;">Número <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="instrumento" style="width: 8%;">Tipo teléfono <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="codigoProyecto" style="width: 10%;">Con Whatsapp <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="Llamado" style="width: 10%;">Acciones <i class="pi pi-sort"></i></th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td style="width: 15%; padding-left: 8px;">{{ rowData.codigoArea }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.numero }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.tipoTelefono }}</td>
+        <td style="width: 10%; padding-left: 5px;">
+          <span *ngIf="!rowData.whatsapp" style="color: #666666">
+            <i class="pi pi-minus-circle"></i>
+          </span>
+          <span *ngIf="rowData.whatsapp" style="color: #4CAF50">
+            <i class="pi pi-check-circle"></i>
+          </span>
+        </td>
+        <td style="width: 10%; padding-left: 5px;">
+          <a class="table-link" style="color: #EC313A; cursor: pointer;" (click)="eliminarContactoPostulante(rowData)">
+            <i class="pi pi-trash"></i> Eliminar 
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+<div class="fila-revision" style="padding: 40px 15px">
+  <div style="display: flex; flex-direction: column;">
+    <label>Email</label>
+    <input type="text" [(ngModel)]="emailPostulante" placeholder="juanperez@gmail.com" class="text-input">
+  </div>
+  <div style="padding-top: 29px;">
+    <app-buttons [label]="'Guardar email'" [icon]="'pi pi-save'" [action]="guardarEmail.bind(this)"></app-buttons>
+  </div>
+</div>
+
+</div>
+
+<div style="margin-top: 40px;">
+  <div class="fila-revision">
+    <span class="subtitulo">Dirección particular</span>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-datos">
+      <label for="region">Región</label>
+      <p-dropdown 
+      [options]="regionesProyectoPostulanteOpciones" 
+      [(ngModel)]="selectedRegionPostulante" 
+      optionLabel="nombre" 
+      placeholder="Seleccione una región"
+      (onChange)="onRegionChange()">
+    </p-dropdown>
+  </div>
+  <div class="columna-datos" style="padding-left: 15px;">
+    <label for="comuna">Comuna</label>
+    <p-dropdown 
+    [options]="comunaProyectoPostulanteOpciones" 
+    [(ngModel)]="selectedComunaPostulante" 
+    optionLabel="nombre" 
+    placeholder="Seleccione una comuna"
+    [disabled]="!selectedRegionPostulante"
+    (onChange)="onComunaChange()">
+  </p-dropdown>
+</div>
+<div class="columna-datos" style="padding-left: 15px;">
+  <label for="sector">Sector</label>
+  <p-dropdown
+  [options]="sectorProyectoPostulanteOpciones"
+  [(ngModel)]="selectedSectorPostulante"
+  optionLabel="nombre"
+  placeholder="Seleccione un sector"
+  [disabled]="!selectedComunaPostulante">
+</p-dropdown>
+</div>
+</div>
+<div class="fila-revision">
+  <div style="display: flex; flex-direction: column;">
+    <label>Dirección</label>
+    <input type="text" [(ngModel)]="direccionPostulante" placeholder="Lord Cochrane" class="text-input" style="width: 551px;">
+  </div>
+  <div class="columna-datos" style="padding-left: 15px;">
+    <app-input-text style="width: 168px; padding-top: 25px;" [placeholder]="'-'" [(value)]="numeroDireccionPostulante" [disable]="false"
+    [label]="'Número'" [inputId]="'numeroInput'" [useFormControl]="false">
+  </app-input-text>
+</div>
+<div class="columna-datos" style="padding: 30px 0 0 15px;">
+  <div class="fila-datos">
+    <p-checkbox
+    id="direccionSinNumero"
+    [value]="direccionSinNumeroPostulante"
+    [(ngModel)]="direccionSinNumeroPostulante"
+    (onChange)="onCheckboxWhatsappChange()"
+    binary="true">
+  </p-checkbox>
+  <label for="direccionSinNumero" style="margin-left: 5px; padding-top: 5px;">Dirección sin número</label>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Antecedentes formulador -->
+<span class="titulo" style="padding: 40px 0 0 15px;">Antecedentes del formulador</span>
+<div style="margin-top: 40px;">
+  <div class="fila-revision">
+    <span class="subtitulo">Datos generales</span>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-revision">
+      <label>Consultor</label>
+      <span class="subTexto">{{ nombreConsultor }}</span>
+    </div>
+    <div class="columna-revision">
+      <label>RUT</label>
+      <span class="subTexto">{{ rutConsultor }}</span>
+    </div>
+    <div class="columna-revision">
+    </div>
+    <div class="columna-revision">
+    </div>
+  </div>
+  
+  <!-- Antecedentes Contratista --->
+  <span class="titulo" style="padding: 40px 0 0 15px;">Antecedentes del consultor</span>
+  <div style="margin-top: 40px;">
+    <div class="fila-revision">
+      <span class="subtitulo">Datos generales</span>
+    </div>
+
+    <div class="fila-revision">
+      <div class="columna-datos">
+        <label for="contratistas">Seleccionar consultor</label>
+        <p-dropdown 
+        class="dropdown-max"
+        [options]="contratistas" 
+        [(ngModel)]="selectedContratista" 
+        optionLabel="nombre" 
+        placeholder="Seleccione un consultor"
+        (onShow)="getContratistas()"
+        (onChange)="onRContratistasChange()">
+      </p-dropdown>
+    </div>
+  </div>
+
+  <div class="fila-revision"> 
+    <div class="col">
+          <label>Tipo de tributación</label>
+          <br>
+          <p-radioButton name="anio" value="Boleta de honorarios" [(ngModel)]="tipoTributacion"></p-radioButton>
+          <span class="font-level-7" style="padding-bottom: 20px;">
+            Boleta de honorarios
+          </span>
+          <br>
+          <p-radioButton name="anio" value="Afecto a IVA" [(ngModel)]="tipoTributacion"></p-radioButton>
+          <span class="font-level-7">
+            Afecto a IVA
+          </span>
+        </div>
+    </div>
+    </div>
+  
+  <div style="margin-top: 40px;">
+    <div class="fila-revision">
+      <span class="subtitulo">Datos de contacto</span>
+    </div>
+    <div class="fila-revision">
+      <div class="columna-datos">
+        <label for="intrumento-concurso">Cod. Área</label>
+        <p-dropdown class="dropdown-small" [options]="codigoAreaOptions" [(ngModel)]="selectedCodigoAreaContratista" optionLabel="nombre"
+        placeholder="Seleccione"/>
+      </div>
+      <div class="columna-datos" style="padding-left: 15px;">
+        <app-input-text style="width: 240px; padding-top: 25px;" [placeholder]="'Ingresar número'" [(value)]="numeroContactoContratista" [disable]="false"
+        [label]="'Número'" [inputId]="'numeroInput'" [useFormControl]="false">
+      </app-input-text>
+    </div>
+    <div class="columna-datos" style="padding-left: 15px;">
+      <label for="intrumento-concurso">Tipo teléfono</label>
+      <p-dropdown class="dropdown-small" [options]="tipoTelefonoOpciones" [(ngModel)]="selectedTipoTelefonoContratista" optionLabel="tipoTelefono"
+      placeholder="Seleccione"/>
+    </div>
+    <div class="columna-datos" style="padding-left: 15px;">
+      <label>Whatsapp</label>
+      <div class="fila-datos">
+        <p-checkbox
+        id="whatsappCheckbox"
+        [value]="esWhatsappContratista"
+        [(ngModel)]="esWhatsappContratista"
+        (onChange)="onCheckboxWhatsappChange()"
+        binary="true">
+      </p-checkbox>
+      <label for="whatsappCheckbox" style="margin-left: 5px; padding-top: 5px;">Es teléfono con WhatsApp</label>
+    </div>
+  </div>
+  <div class="columna-datos" style="padding: 10px 0 0 60px;">
+    <app-buttons [label]="'Agregar'" [icon]="'pi pi-plus'" [action]="agregarContactoContratista.bind(this)"></app-buttons>
+  </div>
+</div>
+<div style="padding-left: 15px;">
+  <p-table [value]="dataContactosContratista" styleClass="table-striped my-table">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="usuario" style="width: 16%;">Código de área <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="rut" style="width: 10%;">Número <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="instrumento" style="width: 8%;">Tipo teléfono <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="codigoProyecto" style="width: 10%;">Con Whatsapp <i class="pi pi-sort"></i></th>
+        <th pSortableColumn="Llamado" style="width: 10%;">Acciones <i class="pi pi-sort"></i></th>
+      </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="body" let-rowData>
+      <tr>
+        <td style="width: 15%; padding-left: 8px;">{{ rowData.codigoArea }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.numero }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.tipoTelefono }}</td>
+        <td style="width: 10%; padding-left: 5px;">
+          <span *ngIf="!rowData.whatsapp" style="color: #666666">
+            <i class="pi pi-minus-circle"></i>
+          </span>
+          <span *ngIf="rowData.whatsapp" style="color: #4CAF50">
+            <i class="pi pi-check-circle"></i>
+          </span>
+        </td>
+        <td style="width: 10%; padding-left: 5px;">
+          <a class="table-link" style="color: #EC313A; cursor: pointer;" (click)="eliminarContactoFormulador(rowData)">
+            <i class="pi pi-trash"></i> Eliminar 
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  
+</div>
+<div class="fila-revision" style="padding: 40px 15px">
+  <div style="display: flex; flex-direction: column;">
+    <label>Email</label>
+    <input type="text" [(ngModel)]="emailContratista" placeholder="juanperez@gmail.com" class="text-input">
+  </div>
+  <div style="padding-top: 29px;">
+    <app-buttons [label]="'Guardar email'" [icon]="'pi pi-save'" [action]="guardarEmail.bind(this)"></app-buttons>
+  </div>
+</div>
+
+</div>
+
+<div style="margin-top: 40px;">
+  <div class="fila-revision">
+    <span class="subtitulo">Dirección particular</span>
+  </div>
+  <div class="fila-revision">
+    <div class="columna-datos">
+      <label for="region">Región</label>
+      <p-dropdown 
+      [options]="regionesProyectoContratistaOpciones" 
+      [(ngModel)]="selectedRegionContratista" 
+      optionLabel="nombre" 
+      placeholder="Seleccione una región"
+      (onChange)="onRegionChange()">
+    </p-dropdown>
+  </div>
+  <div class="columna-datos" style="padding-left: 15px;">
+    <label for="comuna">Comuna</label>
+    <p-dropdown 
+    [options]="comunaProyectoContratistaOpciones" 
+    [(ngModel)]="selectedComunaContratista" 
+    optionLabel="nombre" 
+    placeholder="Seleccione una comuna"
+    [disabled]="!selectedRegionContratista"
+    (onChange)="onComunaChange()">
+  </p-dropdown>
+</div>
+<div class="columna-datos" style="padding-left: 15px;">
+  <label for="sector">Sector</label>
+  <p-dropdown 
+  [options]="sectorProyectoContratistaOpciones" 
+  [(ngModel)]="selectedSectorContratista" 
+  optionLabel="nombre" 
+  placeholder="Seleccione un sector"
+  [disabled]="!selectedComunaContratista">
+</p-dropdown>
+</div>
+</div>
+<div class="fila-revision">
+  <div class="columna-datos">
+    <app-input-text style="width: 551px; padding-top: 25px;" [placeholder]="'Lord Cochrane'" [(value)]="direccionContratista" [disable]="false"
+    [label]="'Dirección'" [inputId]="'numeroInput'" [useFormControl]="false">
+  </app-input-text>
+</div>
+<div class="columna-datos" style="padding-left: 15px;">
+  <app-input-text style="width: 168px; padding-top: 25px;" [placeholder]="'-'" [(value)]="numeroDireccionContratista" [disable]="false"
+  [label]="'Número'" [inputId]="'numeroInput'" [useFormControl]="false">
+</app-input-text>
+</div>
+<div class="columna-datos" style="padding: 30px 0 0 15px;">
+  <div class="fila-datos">
+    <p-checkbox
+    id="direccionSinNumero"
+    [value]="direccionSinNumeroContratista"
+    [(ngModel)]="direccionSinNumeroContratista"
+    (onChange)="onCheckboxWhatsappChange()"
+    binary="true">
+  </p-checkbox>
+  <label for="direccionSinNumero" style="margin-left: 5px; padding-top: 5px;">Dirección sin número</label>
+</div>
+</div>
+</div>
+</div>

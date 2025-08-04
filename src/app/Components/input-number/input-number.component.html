@@ -1,0 +1,70 @@
+<div style="display: flex; flex-direction: column">
+  <!-- Mostrar el label solo si existe -->
+  <label
+    *ngIf="label"
+    [for]="inputId"
+    class="font-level-7"
+    [ngClass]="{ disabled: disable }"
+  >
+    {{ label }}
+  </label>
+
+  <!-- Contenedor para el input con icono al final -->
+  <div class="input-container">
+    <!-- Input con FormControl -->
+    <input
+      *ngIf="useFormControl && formControlInstance"
+      [id]="inputId"
+      class="number-input"
+      type="text"
+      [formControl]="formControlInstance"
+      [placeholder]="placeholder"
+      [disabled]="
+        disable === true || disable === 'first' || disable === 'second'
+      "
+      [ngClass]="{
+        'disabled-first': disable === 'first',
+        'disabled-second': disable === 'second',
+        'invalid-number': numberInvalido
+      }"
+      [style.width]="width"
+      [style.height]="height"
+    />
+
+    <!-- Input con ngModel -->
+    <input
+      *ngIf="!useFormControl"
+      [id]="inputId"
+      class="number-input"
+      type="text"
+      [(ngModel)]="value"
+      (input)="onInputChange($event)"
+      [placeholder]="placeholder"
+      [disabled]="
+        disable === true || disable === 'first' || disable === 'second'
+      "
+      [ngClass]="{
+        'disabled-first': disable === 'first',
+        'disabled-second': disable === 'second',
+        'invalid-number': numberInvalido
+      }"
+      [style.width]="width"
+      [style.height]="height"
+    />
+
+    <!-- Icono Condicional -->
+    <img *ngIf="tipo === 'CLP'" src="assets/MoneySymbol.png" class="icon" />
+    <img
+      *ngIf="tipo === 'porcentaje'"
+      src="assets/Porcent.png"
+      class="icon porciento"
+    />
+  </div>
+
+  <!-- Contenedor para el mensaje de error con altura fija -->
+  <div class="error-container" *ngIf="numberInvalido">
+    <span *ngIf="numberInvalido" class="error-message">
+      {{ errorMessage }}
+    </span>
+  </div>
+</div>

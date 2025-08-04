@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="confirmacion-demanda-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Crear/editar demanda'" [subtitle]="subtitle" [redireccion]="redireccion"></app-title>
+  <div class="card-detail" style="width: 60%; margin-left: 10px;" *ngIf="estadoDemanda === 'ADMISIBLE'; else redCard">
+    <div class="icono"><img src="assets/InfoGreen.png" alt="Info" /></div>
+    <div class="descripcion">
+      <span>
+        La demanda para <span class="black-text">
+          {{ nombreUsuario }} ({{ rutUsuario }}) 
+        </span>
+        se ha creado exitosamente y ha sido marcada como
+      </span>
+      <span class="black-text">
+        {{ estadoDemanda }} <br>
+        El número de demanda es {{ idDemanda }}
+      </span>
+    </div>
+    <div class="close-icono"><i class="pi pi-times"></i></div>
+  </div>
+  <ng-template #redCard>
+    <div class="card-detail-red" style="width: 60%; margin-left: 10px;">
+      <div class="icono"><img src="assets/InfoRed.png" alt="Logo" /></div>
+      <div class="descripcion">
+        <span>
+          La demanda para <span class="black-text">
+            {{ nombreUsuario }} ({{ rutUsuario }}) 
+          </span>
+          se ha creado exitosamente y ha sido marcada como
+        </span>
+        <span class="black-text">
+          {{ estadoDemanda }} <br>
+          El número de demanda es {{ idDemanda }}
+        </span>
+      </div>
+      <div class="close-icono"><i class="pi pi-times"></i></div>
+    </div>
+  </ng-template>
+  <div class="row">
+    <div style="padding-left: 25px;">
+      <app-buttons [label]="'Declaración Jurada'" [icon]="'pi pi-download'" [action]="descargarDocumentoDeclaracionJurada.bind(this)"></app-buttons>
+    </div>
+    <div style="padding-left: 15px;">
+      <app-buttons [label]="'Carta Compromiso'" [icon]="'pi pi-download'" [action]="descargarDocumentoCartaCompromiso.bind(this)"></app-buttons>
+    </div>
+    <div style="padding-left: 15px;">
+      <app-buttons [label]="'Listado Consultores'" [icon]="'pi pi-download'" [action]="descargarDocumentoListadoConsultores.bind(this)"></app-buttons>
+    </div>
+    <div style="padding-left: 15px;">
+      <app-buttons [label]="'Comprobante de demanda'" [icon]="'pi pi-download'" [action]="descargarDocumentoComprobanteDemanda.bind(this)"></app-buttons>
+    </div>
+  </div>
+  <a href="demandas-home">Ver todas las demandas</a>
+</div>

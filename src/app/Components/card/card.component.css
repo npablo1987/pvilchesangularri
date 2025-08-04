@@ -1,0 +1,145 @@
+.badge.font-level-7 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  background: var(--Info-Lighten-5, #E3F2FD);
+  color: #1565C0; 
+  border-radius: 24px;
+  margin: 0 15px;
+}
+
+.card-detail {
+  width: 360px;
+  height: 280px;
+  padding: 20px 0px 16px 0px;
+  border-radius: 16px;
+  border: 2px solid var(--Gris-10, #E6E6E6);
+  opacity: 1;
+}
+
+.card-detail-new { 
+  width: 360px;
+  height: 280px;
+  border-radius: 16px;
+  border: 2px dashed var(--Gris-10, #B3B3B3);
+  background-color: #F2F2F2;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.button-new .font-level-7 {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  color: #1565C0;
+}
+
+.button-new { 
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-new .btn-primary {
+  background-color: var(--Blanco-Base, #FFFFFF);
+  border: 2px solid #1565C0; 
+  color: #1565C0; 
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.button-new .btn-primary .pi {
+  margin-right: 8px;
+  width: 24px;
+}
+
+.h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  color: #373737;
+}
+
+.card-detail:hover {
+  border-color: #1565C0;
+  cursor: pointer;
+}
+
+.card-detail:hover .card-body .h2 {
+  color: #1565C0;
+}
+
+.footer-card .font-level-7 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  color: #373737;
+}
+
+.footer-card .font-level-6   {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #373737;
+}
+
+.chip {
+    width: 80px;
+    height: 29px;
+    padding: 4px 8px;
+    gap: 8px;
+    border-radius: 24px 0px 0px 0px;
+    opacity: 0;
+    background: var(--Info-Lighten-5, #E3F2FD);
+    color: #000;
+    font-size: 14px;
+}
+
+.card-title {
+  padding: 8px 16px;
+}
+
+.card-body {
+  padding: 0px 16px;
+}
+
+.card-footer {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  border-top: none;
+  background-color: white;
+}
+
+.card-grid-area { 
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 12px 15px;
+    grid-area: card;
+}
+
+.footer-card {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.no-hover {
+  pointer-events: none;         
+  cursor: default; 
+}

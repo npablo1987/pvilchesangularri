@@ -1,0 +1,20 @@
+.chip {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  display: inline-block;
+  
+  &.success {
+    background-color: #E8F5E9;
+    color: #1B5E20;
+  }
+
+  &.error {
+    background-color: #FFEBEF;
+    color: #FB3B3B;
+  }
+}

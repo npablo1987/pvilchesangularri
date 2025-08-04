@@ -1,0 +1,194 @@
+<app-header></app-header>
+<div class="formulario-demandas-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Crear/editar demanda'" [subtitle]="subtitle"></app-title>
+  <div class="col" *ngIf="esRevision">
+    <div class="fila-revision">
+      <div class="columna-revision">
+        <label>Creado por</label>
+        <span>{{ nombreUsuario }}</span>
+      </div>
+      <div class="columna-revision">
+        <label>Nº Demanda</label>
+        <span>{{ numeroDemanda }}</span>
+      </div>
+      <div class="columna-revision">
+        <label>Estado</label>
+        <app-chip [text]="estadoDemanda" [color]="chipColor"></app-chip>
+      </div>
+    </div>
+    <div class="fila-revision">
+      <div class="columna-revision">
+        <label>Agencia de área</label>
+        <span>{{ areaAgencia }}</span>
+      </div>
+      <div class="columna-revision">
+        <label>Fecha</label>
+        <span>{{ fechaCreacion | date:'dd-MM-yyyy' }}</span>
+      </div>
+      <div class="columna-revision">
+        <label>Proyecto</label>
+        <span>conProyecto</span>
+      </div>
+    </div>
+  </div>
+  <div class="div-form" *ngIf="!esRevision">
+    <div class="col">
+      <label for="tipoUsuario">Tipo de usuario</label>
+      <p-dropdown [options]="tiposUsuarioAgricultor" [(ngModel)]="selectedTipoUsuarioAgricultor"
+      (ngModelChange)="onTipoAgricultorChange($event)"
+      optionLabel="tipoUsuario" placeholder="Seleccione una opción" />
+    </div>
+  </div>
+  <app-identificacion-agricultores
+  [esRevision]="esRevision"
+  [tipoAgricultor]="tipoAgricultor"
+  [mostrarCamposAgricultor]="mostrarCamposAgricultor"
+  [resetCampos]="resetCampos"
+  (resetCompleted)="resetCompleted()"
+  (identificadorOk)="identificadorOk($event)"
+  [identificadorEditar]="identificadorEditar"
+  [esEditar]="esEditar">
+</app-identificacion-agricultores>
+  <div class="row" style="margin-top: 20px; padding-left: 20px;" *ngIf="mostrarCamposAgricultor && !esRevision">
+    <span class="label-1">Demandas vigentes</span>
+  </div>
+  <div *ngIf="mostrarCamposAgricultor && !esRevision" style="padding: 0px 30px;">
+    <p-table [value]="demandas"
+    styleClass="table-striped my-table">
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="id" style="width: 10%;">
+          Codigo <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="instrumento" style="width: 8%;">
+          Instrumento <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="agencia" style="width: 10%;">
+          Agencia de Área <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="fechaCreacion" style="width: 10%;">
+          Fecha creación <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="estado" style="width: 5%;">
+          Estado <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="conProyecto" style="width: 10%;">
+          Con Proyecto <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="acciones" style="width: 5%;">
+          acciones
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-index="rowIndex">
+      <tr>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.id }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.instrumento }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.agencia }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.fechaCreacion | date:'dd-MM-yyyy' }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.estado }}</td>
+        <td style="width: 10%; text-align: center; padding-right: 50px;">
+          <span *ngIf="rowData.conProyecto % 2 === 0" style="color: #4CAF50">
+            <i class="pi pi-check-circle"></i>
+            Si
+          </span>
+          <span *ngIf="rowData.conProyecto % 2 !== 0" style="color: #666666">
+            <i class="pi pi-minus-circle"></i>
+            No
+          </span>
+        </td>
+        <td style="width: 10%; padding-left: 5px;">
+          <a class="table-link" (click)="verDemanda(rowData.internalid)">
+            <i class="pi pi-eye"></i> Ver
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  </div>
+  <div class="row" style="margin-top: 20px; padding-left: 20px;" *ngIf="mostrarCamposAgricultor">
+    <span class="label-1">Detalles de la demanda</span>
+  </div>
+  <div class="div-form" *ngIf="mostrarCamposAgricultor">
+    <div style="display: flex; flex-direction: column; padding-left: 20px;">
+      <label for="intrumento-concurso">Instrumento:</label>
+      <p-dropdown [options]="instrumentos" [(ngModel)]="selectedInstrumento" optionLabel="name"
+       [placeholder]="instrumentoRevision || 'Seleccione un instrumento'" [disabled]="esRevision"/>
+    </div>
+  </div>
+  <div class="div-form" *ngIf="mostrarCamposAgricultor">
+    <div style="margin-top: 20px; display: flex; flex-direction: column; padding-left: 20px;">
+      <label class="subtitle-dialog">Descripción de la demanda (máx. 250 caracteres)</label>
+      <div class="custom-textarea-container">
+        <textarea 
+          class="custom-textarea" 
+          [(ngModel)]="descripcionDemanda" 
+          rows="30" 
+          cols="40" 
+          maxlength="250" 
+          [placeholder]="descripcionRevision || 'Seleccione un instrumento'" 
+          [disabled]="esRevision">
+        </textarea>
+        <div *ngIf="descripcionDemanda && descripcionDemanda.length > 250" class="error-message">
+          El máximo es de 250 caracteres
+        </div>
+      </div>      
+    </div>
+  </div>
+  <div *ngIf="mostrarCamposAgricultor" style="padding-left: 20px;">
+    <div *ngFor="let pregunta of preguntasDemanda; let i = index" style="display: flex; flex-direction: column;">
+      <div class="div-form">
+        <app-radio-button [firstOption]="'Sí'" [secondOption]="'No'" [label]="pregunta.pregunta"
+          [disable]="!pregunta.editable || esRevision" [(value)]="pregunta.respuesta" [useFormControl]="false"
+          (valueChange)="onValueChange($event, i)">
+        </app-radio-button>
+      </div>
+    </div>
+  </div>
+  <div class="row" style="margin-top: 40px; margin-bottom: 10px; padding-left: 20px;" *ngIf="esRevision">
+    <span class="label-1">Documentos de la demanda</span>
+  </div>
+  <div class="row" *ngIf="esRevision" style="padding-left: 20px">
+    <div style="padding-left: 25px;">
+      <app-buttons [label]="'Declaración Jurada'" [icon]="'pi pi-download'" [action]="descargarDocumentoDeclaracionJurada.bind(this)"></app-buttons>
+    </div>
+    <div style="padding-left: 15px;">
+      <app-buttons [label]="'Carta Compromiso'" [icon]="'pi pi-download'" [action]="descargarDocumentoCartaCompromiso.bind(this)"></app-buttons>
+    </div>
+    <div style="padding-left: 15px;">
+      <app-buttons [label]="'Listado Consultores'" [icon]="'pi pi-download'" [action]="descargarDocumentoListadoConsultores.bind(this)"></app-buttons>
+    </div>
+    <div style="padding-left: 15px;">
+      <app-buttons [label]="'Comprobante de demanda'" [icon]="'pi pi-download'" [action]="descargarDocumentoComprobanteDemanda.bind(this)"></app-buttons>
+    </div>
+  </div>
+  <div *ngIf="mostrarCamposAgricultor">
+    <p-divider />
+  </div>
+  <div class="row form-inputs" *ngIf="mostrarCamposAgricultor">
+    <div class="col form-buttons">
+      <div class="button-new" *ngIf="esRevision || esEdicion">
+        <button class="botones" (click)="volver()">
+          <i class="pi pi-caret-left"></i> Volver
+        </button>
+      </div>
+      <div class="button-new" *ngIf="!esRevision && !esEdicion">
+        <button class="botones" (click)="guardarYVolver()">
+          <i class="pi pi-caret-left"></i> Guardar y Volver
+        </button>
+      </div>
+      <div class="button-crear-demanda" *ngIf="!esRevision && !esEdicion">
+        <button class="button-demanda" (click)="crearDemanda()">
+          <i class="pi pi-save" style="margin-right: 10px;"></i> Crear demanda
+        </button>
+      </div>
+      <div class="button-crear-demanda" *ngIf="esEdicion && !esRevision">
+        <button class="button-demanda" (click)="editarDemanda()">
+          <i class="pi pi-save" style="margin-right: 10px;"></i> Editar demanda
+        </button>
+      </div>
+    </div>    
+  </div>
+</div>

@@ -1,0 +1,23 @@
+<div class="breadcrumb-grid-area">
+  <div class="migas">
+    <div class="pan" *ngFor="let item of breadcrumb">
+      <a class="miga-de-pan" href="{{ item.url }}">
+        <span class="font-level-6">
+          {{ item.label }}
+        </span>
+        <span *ngIf="breadcrumb.length > 1 && item !== breadcrumb[breadcrumb.length - 1]"><i class="pi pi-angle-right"
+            style="padding-top: 3px; color: #cccccc; margin: 0px 10px;"></i></span>
+      </a>
+    </div>
+  </div>
+  <div class="toolbar">
+    <div class="toolbar-btn-group">
+      <a class="toolbar-btn toolbar-behavior-contrast" (click)="toggleContrast()"><i class="cl cl-contrast"></i></a>
+      <a class="toolbar-btn toolbar-behavior-decrease" (click)="toggleFontSize(0)"><i class="cl cl-decrease-text"></i></a>
+      <a class="toolbar-btn toolbar-behavior-increase" (click)="toggleFontSize(1)"><i class="cl cl-increase-text"></i></a>
+    </div>
+    <a class="toolbar-btn toolbar-toggler" href="#"><i class="cl cl-accessibility toolbar-behavior-on"></i><span
+        class="toolbar-behavior-off">X</span></a>
+  </div>
+</div>
+ 

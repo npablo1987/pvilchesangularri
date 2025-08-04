@@ -1,0 +1,64 @@
+.confirmacion-demanda-grid-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-areas:
+    'breadcrumb'
+    'title'
+    'cards'
+    'table';
+  grid-template-columns: 1fr;
+  width: 100%;
+  padding: 0px 120px;
+}
+
+.icono {
+  padding-top: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  border: 2px solid #4CAF50;
+  opacity: 1;
+}
+
+.card-detail-red {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  border: 2px solid #FB3B3B;
+  opacity: 1;
+}
+
+.descripcion {
+  text-align: start;
+  margin: 0px 10px;
+  width: 100%;
+}
+
+.close-icono {
+  padding-top: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.black-text {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+
+a {
+  font-family: 'Roboto Slab', serif;
+  font-size: 19px;
+  font-weight: 700;
+  color: #1D70B8;
+  line-height: 28.5px;
+  text-align: left;
+  margin-left: 10px;
+}

@@ -1,0 +1,88 @@
+  <div style="width: 1140px;">
+    <span class="titulo" style="padding: 40px 0 0 15px;">Antecedentes del formulador</span>
+  <div style="margin-top: 40px;">
+    <div class="fila-revision" style="padding: 0 15px;">
+      <span class="subtitulo">Datos generales</span>
+    </div>
+  <div class="fila-revision"> 
+  <div class="col">
+    <label>¿El proyecto solo contempla drenaje?</label>
+    <br>
+    <p-radioButton name="drenaje" [value]="true" [(ngModel)]="contemplaDrenaje" (ngModelChange)="onDrenajeChange($event)"></p-radioButton>
+    <span class="font-level-7" style="padding-bottom: 20px;">
+      Si
+    </span>
+    <br>
+    <p-radioButton name="drenaje" [value]="false" [(ngModel)]="contemplaDrenaje" (ngModelChange)="onDrenajeChange($event)"></p-radioButton>
+    <span class="font-level-7">
+      No
+    </span>
+  </div>
+  <div class="col">
+    <label>¿El solicitante es una Organización de Usuarios de Aguas (organizada legalmente o no organizada)?</label>
+    <br>
+    <p-radioButton name="organizacion" [value]="true" [(ngModel)]="esOrganizacion"></p-radioButton>
+    <span class="font-level-7" style="padding-bottom: 20px;">
+      Si
+    </span>
+    <br>
+    <p-radioButton name="organizacion" [value]="false" [(ngModel)]="esOrganizacion"></p-radioButton>
+    <span class="font-level-7">
+      No
+    </span>
+  </div>
+      <div class="col"></div>
+  </div>
+  <div class="fila-datos" style="padding: 30px 15px;">
+    <div class="columna-datos" style="width: 450px;">
+      <span class="titulo">Carpeta legal de la organización</span>
+      <span class="subtitulo">Seleccionar archivo</span>
+      <span class="subTexto">Subir archivo máximo 5MB </span>
+      <div style="width: 100%; margin-top: 20px;">
+        <input type="file" id="fileInput" accept=".pdf" (change)="onFileSelected($event)" hidden />
+        <button class="botones" (click)="triggerFileInput()">
+          <div class="fila-datos">
+            <span>Elegir archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button>
+      </div>
+      <div style="width: 100%; margin-top: 20px;">
+        <button class="button-demanda" (click)="guardarArchivo()">
+          Guardar archivo <i class="pi pi-chevron-right"></i>
+        </button>
+      </div>
+    </div>
+    <div class="columna-datos" style="width: 744px; justify-content: center;">
+      <p-table [value]="listadoCarpetaLegal" styleClass="table-striped my-table">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="nombre" style="width: 16%;">Archivo <i class="pi pi-sort"></i></th>
+            <th pSortableColumn="acciones" style="width: 10%;">Acciones <i class="pi pi-sort"></i></th>
+          </tr>
+        </ng-template>
+  
+        <ng-template pTemplate="body" let-rowData>
+          <tr>
+            <td style="width: 15%; padding-left: 8px;">{{ rowData.nombre }}</td>
+            <td style="width: 10%; padding-left: 5px;">
+              <a class="table-link" style="color: #EC313A;" (click)="eliminarArchivo(rowData)">
+                <i class="pi pi-trash"></i> Eliminar 
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  
+  <div class="fila-revision" style="padding: 40px 15px;">
+    <app-acreditacion-tierras></app-acreditacion-tierras>
+  </div>
+  
+  <!-- Acreditacion aguas -->
+  <div class="fila-revision" style="padding: 40px 15px;" *ngIf="!contemplaDrenaje">
+    <app-acreditacion-aguas></app-acreditacion-aguas>
+  </div>
+  </div>
+  </div>

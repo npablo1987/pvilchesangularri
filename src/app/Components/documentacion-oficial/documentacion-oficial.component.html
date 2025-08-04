@@ -1,0 +1,19 @@
+<!-- TODO: Revisar si se va a utilizar-->
+<div class="fila-datos" style="padding: 15px 60px 15px 0;">
+  <div class="columna-datos">
+    <span class="subtitulo">{{ subTitulo }}</span>
+    <span class="subTexto" style="width: 343px;"><a href="#">{{ textoFormato }} </a>{{ subTexto }}</span>
+
+    <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo {{ tamanio }}MB</span>
+
+    <div style="width: 100%;">
+    <input type="file" id="fileInput" accept=".pdf" (change)="onFileSelected($event)" hidden />
+    <button class="botones" (click)="triggerFileInput()">
+      <div class="fila-datos">
+        <span>Cargar archivo</span>
+        <i class="pi pi-plus-circle"></i>
+      </div>
+    </button> 
+  </div>
+  </div>
+</div>

@@ -1,0 +1,108 @@
+<span class="titulo">Acreditación Tierra</span>
+<p-card>
+  <div class="fila-boton" *ngIf="index !== 0">
+    <button class="btn-remove" (click)="onRemoveClick()">
+      <i class="pi pi-trash"></i> Quitar
+    </button>
+  </div>
+  <!-- Fila de datos -->
+  <div class="fila-datos">
+    <div class="columna-datos">
+      <label for="intrumento-concurso">Rol</label>
+          <p-dropdown
+            class="dropdown-large"
+            [options]="prediosRut"
+            [(ngModel)]="predioSeleccionado"
+            optionLabel="rol"
+            placeholder="Seleccione"
+            (onChange)="onRolSeleccionado($event)"
+          ></p-dropdown>
+    </div>
+     <div class="columna-datos">
+      <app-input-text [placeholder]="'Ingrese nombre del predio'" [(value)]="nombrePredio" [disable]="true"
+      [label]="'Nombre del predio'" [inputId]="'nombrePredio'" [useFormControl]="false">
+    </app-input-text>
+    </div>
+    <div class="columna-datos">
+      <app-input-text [placeholder]="'2:50'" [(value)]="superficiePredio" [disable]="true"
+            [label]="'Superficie (Ha)'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+  </div>
+   <div class="fila-datos">
+    <div class="columna-datos">
+       <app-input-text [placeholder]="'Araucania'" [(value)]="regionPredio" [disable]="true"
+            [label]="'Región'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+    <div class="columna-datos">
+      <app-input-text [placeholder]="'Cunco'" [(value)]="comunaPredio" [disable]="true"
+            [label]="'Comuna'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+    <div class="columna-datos">
+      <app-input-text [placeholder]="'Riego II'" [(value)]="clasificacionUsoSuelo" [disable]="true"
+            [label]="'Clasif. uso de suelo'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+  </div>
+   <div class="fila-datos">
+    <div class="columna-datos">
+     <app-input-text [placeholder]="'Arrendatario'" [(value)]="tenenciaPredio" [disable]="true"
+            [label]="'Tenencia'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+    <div class="columna-datos">
+      <app-input-text [placeholder]="'10-10-2024'" [(value)]="fechaInicioContrato" [disable]="true"
+            [label]="'Fecha inicio contrato'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+    <div class="columna-datos">
+      <app-input-text [placeholder]="'11-10-2024'" [(value)]="fechaTerminoContrato" [disable]="true"
+            [label]="'Fecha término contrato'" [inputId]="'numeroInput'" [useFormControl]="false">
+          </app-input-text>
+    </div>
+  </div>
+   <div class="fila-datos" style="padding: 30px 15px;">
+     <div class="columna-datos" style="width: 450px;">
+    <span class="titulo">Carpeta legal de tierra</span>
+    <span class="subtitulo">Seleccionar archivo</span>
+    <span class="subTexto">Subir archivo máximo 100MB </span>
+    <div style="width: 100%; margin-top: 20px;">
+      <input type="file" id="fileInputTierra{{index}}" accept=".pdf" (change)="onFileSelected($event)" hidden />
+      <button class="botones" (click)="triggerFileInput()">
+        <div class="fila-datos">
+          <span>Elegir archivo</span>
+          <i class="pi pi-plus-circle"></i>
+        </div>
+      </button>
+    </div>
+    <div style="width: 100%; margin-top: 20px;">
+      <button class="button-demanda" (click)="guardarArchivo()">
+        Guardar archivo <i class="pi pi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="columna-datos" style="width: 744px;">
+    <p-table [value]="data.archivosCarpetaLegal" styleClass="table-striped my-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nombre" style="width: 16%;">Archivo <i class="pi pi-sort"></i></th>
+          <th pSortableColumn="acciones" style="width: 10%;">Acciones <i class="pi pi-sort"></i></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-archivo>
+        <tr>
+          <td style="width: 15%; padding-left: 8px;">{{ archivo.nombre }}</td>
+          <td style="width: 10%; padding-left: 5px;">
+            <a class="table-link" style="color: #EC313A;" (click)="eliminarArchivo(archivo)">
+              <i class="pi pi-trash"></i> Eliminar 
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+</p-card>

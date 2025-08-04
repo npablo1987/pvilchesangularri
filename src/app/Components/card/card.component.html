@@ -1,0 +1,50 @@
+<div class="card-grid-area" *ngIf="borradores.length > 0">
+  <div *ngFor="let borrador of borradores.slice(0, 2); let i = index; esle noBorrador" (click)="verBorradores(borrador.internalid)">
+    <div class="card-detail mb-4" >
+      <div class="card-title">
+        <span class="font-level-7">ID {{ borrador.id }}</span>           
+        <div class="badge badge-light font-level-7">Borrador</div>
+      </div>
+      <div class="card-body">
+        <span class="font-level-3"> {{ borrador.nombre}} </span> 
+      </div>
+      <div class="footer-card">
+        <span class="font-level-6">Región:
+          <span class="font-level-7"> {{ borrador.focalizacionRegion }} </span>
+        </span> 
+        <span class="font-level-6">Inicio:
+          <span class="font-level-7"> {{ borrador.fechaInicioPostulacion | date: 'dd-MM-yyyy'}} </span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="borradores.length === 1" class="card-detail mb-4 no-hover">
+  </div>
+  <div class="card-detail-new mb-4">
+    <div class="button-new">
+      <button class="btn btn-primary" (click)="crearLlamado()"><i class="pi pi-plus-circle"></i>
+        <span class="font-level-7">Crear llamado</span>
+      </button>
+    </div>
+  </div>
+  <ng-template #noBorrador>
+    <div class="card-detail mb-4 no-hover">
+    </div>
+  </ng-template>
+</div>
+
+<div class="card-grid-area" *ngIf="borradores.length === 0">
+  <div class="card-detail mb-4 no-hover">
+    
+  </div>
+  <div class="card-detail mb-4 no-hover">
+
+  </div>
+  <div class="card-detail-new mb-4">
+    <div class="button-new">
+      <button class="btn btn-primary" (click)="crearLlamado()"><i class="pi pi-plus-circle"></i>
+        <span class="font-level-7">Crear llamado</span>
+      </button>
+    </div>
+  </div>
+</div>

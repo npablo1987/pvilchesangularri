@@ -1,0 +1,107 @@
+<div class="table-grid-area" *ngIf="todosLosLlamados; else Llamados">
+    <p-table [value]="ELEMENT_DATA" styleClass="table-striped my-table" [paginator]="true"
+    [rows]="5">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id" style="width: 5%; padding-left: 8px;">
+            ID <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="nombre" style="width: 40%">
+            Llamados <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="focalizacionRegion" style="width: 15%">
+            Región <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="estado" style="width: 10%">
+            Estado <i class="pi pi-sort"></i>
+          </th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td style="width: 5%; padding-left: 8px;">{{rowData.id}}</td>
+          <td style="width: 40%;">{{rowData.nombre}}</td>
+          <td style="width: 15%;">{{rowData.focalizacionRegion}}</td>
+          <td style="width: 10%;">{{rowData.estado}}</td>
+          <td style="width: 20%;">
+            <a (click)="verConcurso(rowData.internalid, rowData.estado)" class="table-link"><i class="pi pi-eye"></i> Ver</a>
+            <a href="#" class="table-link" style="margin-left: 20px;"><i class="pi pi-folder-open"></i> Proyectos</a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <div class="all-callings">
+      <a href="/todos-los-llamados">Todos los llamados
+        <i class="pi pi-caret-right"></i>
+      </a>
+    </div>
+</div>
+
+<ng-template #Llamados>
+    <p-table #dt 
+        [value]="ELEMENT_DATA"
+        [paginator]="true"
+        [rows]="5"
+        [rowsPerPageOptions]="[5, 10, 20]"
+        [globalFilterFields]="['id', 'nombre', 'region', 'estado']"
+        styleClass="table-striped my-table">
+      <ng-template pTemplate="caption">
+        <div class="boton-busqueda">
+          <label for="busqueda-input">Buscar: </label>
+          <div class="input-container">
+            <i class="pi pi-search"></i>
+            <input style="width: 320px;" pInputText type="text" (input)="buscarTabla($event)" 
+              placeholder="Buscar..." id="busqueda-input" />
+          </div>
+        </div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="id" style="width: 5%; padding-left: 8px;">
+            ID <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="nombre" style="width: 40%">
+            Llamados <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="focalizacionRegion" style="width: 15%">
+            Región <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="creadoPor" style="width: 15%">
+            Creado por <i class="pi pi-sort"></i>
+          </th>
+          <th pSortableColumn="estado" style="width: 10%">
+            Estado <i class="pi pi-sort"></i>
+          </th>
+          <th>Acciones</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td style="width: 5%; padding-left: 8px;">{{rowData.id}}</td>
+          <td style="width: 40%;">{{rowData.nombre}}</td>
+          <td style="width: 15%;">{{rowData.focalizacionRegion}}</td>
+          <td style="width: 15%;">{{rowData.creadoPor}}</td>
+          <td style="width: 10%;">{{rowData.estado}}</td>
+          <td style="width: 20%;">
+            <a class="table-link" (click)="toggleLinks(rowData.internalid, $event)">
+              <i class="pi pi-cog"></i> Acciones
+            </a>
+            <div *ngIf="showLinksMap.get(rowData.internalid)" class="additional-links">
+              <div *ngIf="rolUsuario === '2' || rolUsuario === '1'">
+                <a (click)="detalleConcurso(rowData.internalid)"><i class="pi pi-eye"></i> Detalles</a>
+              </div>
+              <a (click)="verConcurso(rowData.internalid, rowData.estado)"><i class="pi pi-search"></i> Ver llamado</a>
+              <a><i class="pi pi-folder"></i> Ver proyectos</a>
+              <div *ngIf="rolUsuario === '1' && rowData.estado === 'Pendiente Aprobación'">
+                <a (click)="revisarConcurso(rowData.internalid)"> <img src="../../../assets/ApproveOrRejectBlue.png"/> Revisar</a>
+              </div>
+              <div *ngIf="rowData.estado === 'Borrador'">
+                <a (click)="eliminarConcurso(rowData.internalid)" style="color: #FB3B3B;"><i class="pi pi-trash"></i> Eliminar</a>
+              </div>
+            </div>
+          </td>                           
+        </tr>
+      </ng-template>
+    </p-table>
+</ng-template>

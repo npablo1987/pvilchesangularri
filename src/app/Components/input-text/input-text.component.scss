@@ -1,0 +1,28 @@
+.text-input {
+  padding: 8px 12px;
+  border: 1px solid #000000;
+  width: 100%;
+}
+
+.text-input:disabled {
+  border-color: #B3B3B3;
+  color: #808080;
+}
+
+.text-input.invalid-rut {
+  border-color: #FB3B3B;
+}
+
+label.disabled {
+  color: #B3B3B3;
+}
+
+.error-container {
+  height: 20px;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: #FB3B3B;
+  font-size: 12px;
+}

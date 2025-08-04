@@ -1,0 +1,8 @@
+ <div class="fila-datos" style="padding: 0 0 5px 15px" *ngFor="let tipo of tipoInversiones">
+      <p-checkbox
+        [binary]="true"
+        [checked]="tipo.selected"
+        (onChange)="onCheckboxChange(tipo)">
+      </p-checkbox>
+      <span style="margin-left: 10px">{{ tipo.nombre | titlecase }}</span>
+    </div>

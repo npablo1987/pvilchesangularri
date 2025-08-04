@@ -1,0 +1,45 @@
+<div style="display: flex; flex-direction: column;">
+  <label
+    *ngIf="label"
+    [for]="inputId"
+    class="font-level-7"
+    [ngClass]="{ 'disabled': disable }"
+  >
+    {{ label }}
+  </label>
+
+  <!-- usa FormControl -->
+  <input
+    *ngIf="useFormControl && formControlInstance"
+    [id]="inputId"
+    class="text-input"
+    type="text"
+    pInputText
+    [formControl]="formControlInstance"
+    [placeholder]="placeholder"
+    [disabled]="disable"
+    [ngClass]="{ 'invalid-rut': rutInvalido && tipo === 'rut' }"
+  />
+
+ <!-- usa ngModel -->
+ <input
+ *ngIf="!useFormControl"
+ [id]="inputId"
+ class="text-input"
+ type="text"
+ pInputText
+ [(ngModel)]="value"
+ (input)="onInputChange($event)"
+ (keydown)="onKeyDown($event)"
+ [placeholder]="placeholder"
+ [disabled]="disable"
+ [ngClass]="{ 'invalid-rut': rutInvalido && tipo === 'rut' }"
+/>
+
+<!-- Contenedor para el mensaje de error con altura fija -->
+<div class="error-container">
+ <span *ngIf="rutInvalido && tipo === 'rut'" class="error-message">
+   El RUT ingresado no es válido
+ </span>
+</div>
+</div>

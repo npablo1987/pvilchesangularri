@@ -1,0 +1,45 @@
+<!-- TODO: Revisar si se utilizara-->
+<div class="fila-datos" style="padding-top: 30px;">
+  <span class="titulo">{{ titulo }}</span>
+</div>
+<div class="fila-datos">
+  <div class="columna-datos" style="width: 450px;">
+    <span class="subtitulo">Seleccionar archivo</span>
+    <span class="subTexto">Subir archivo máximo {{ tamanioArchivo }}MB </span>
+    <div style="width: 100%; margin-top: 20px;">
+      <input type="file" id="fileInput" accept=".pdf" (change)="onFileSelected($event)" hidden />
+      <button class="botones" (click)="triggerFileInput()">
+        <div class="fila-datos">
+          <span>Elegir archivo</span>
+          <i class="pi pi-plus-circle"></i>
+        </div>
+      </button>
+    </div>
+    <div style="width: 100%; margin-top: 20px;">
+      <button class="button-demanda" (click)="guardarArchivo()">
+        Guardar archivo <i class="pi pi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="columna-datos" style="width: 744px;">
+    <p-table [value]="data" styleClass="table-striped my-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nombre" style="width: 16%;">Archivo <i class="pi pi-sort"></i></th>
+          <th pSortableColumn="acciones" style="width: 10%;">Acciones <i class="pi pi-sort"></i></th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData>
+        <tr>
+          <td style="width: 15%; padding-left: 8px;">{{ rowData.nombre }}</td>
+          <td style="width: 10%; padding-left: 5px;">
+            <a class="table-link" style="color: #EC313A;" (click)="eliminarArchivo(rowData)">
+              <i class="pi pi-trash"></i> Eliminar 
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

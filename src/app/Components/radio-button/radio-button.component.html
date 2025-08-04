@@ -1,0 +1,57 @@
+<div style="display: flex; flex-direction: column; margin-bottom: 5px;">
+  <label>{{ label }}</label>
+</div>
+
+<!-- Modo múltiple -->
+<div *ngIf="multiple" style="display: flex; flex-direction: column; gap: 5px;">
+  <div *ngFor="let option of options" style="display: flex; align-items: center;">
+    <!-- FormControl -->
+    <p-radioButton
+      *ngIf="useFormControl"
+      [name]="'radioGroup_' + label"
+      [value]="option"
+      [formControl]="formControl"
+      [disabled]="disable"
+      (onClick)="onSelectionChange(option)">
+    </p-radioButton>
+
+    <!-- ngModel -->
+    <p-radioButton
+      *ngIf="!useFormControl"
+      [name]="'radioGroup_' + label"
+      [value]="option"
+      [(ngModel)]="option.respuesta"
+      [disabled]="disable"
+      (onClick)="onSelectionChange(option)">
+    </p-radioButton>
+    <label>{{ option.name }}</label>
+  </div>
+</div>
+
+<!-- Modo normal -->
+<div *ngIf="!multiple" style="display: flex; flex-direction: column; gap: 10px;">
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <p-radioButton
+      *ngIf="!useFormControl"
+      name="radioGroup_{{ label }}"
+      [value]="true"
+      [(ngModel)]="value"
+      [disabled]="disable"
+      (onClick)="onSelectionChange(true)">
+    </p-radioButton>
+    <span>{{ firstOption }}</span>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 5px;">
+    <p-radioButton
+      *ngIf="!useFormControl"
+      name="radioGroup_{{ label }}"
+      [value]="false"
+      [(ngModel)]="value"
+      [disabled]="disable"
+      (onClick)="onSelectionChange(false)">
+    </p-radioButton>
+    <span>{{ secondOption }}</span>
+  </div>
+</div>
+

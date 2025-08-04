@@ -1,0 +1,22 @@
+<!--
+<div>
+  <div class="col">
+    <label for="Token"
+           class="font-semibold w-6rem"
+           style="margin-right: 10px;">Token</label>
+
+    <input  pInputText
+            id="Token"
+            [(ngModel)]="token"
+            class="flex-auto"
+            autocomplete="off" />
+
+    <p-button label="Login" (onClick)="logConToken()"></p-button>
+  </div>
+</div>
+-->
+
+<!--  Cuando el token viene en la URL solo mostramos
+      un pequeño mensaje (puedes reemplazarlo por un spinner) -->
+<p *ngIf="token === ''">Esperando token…</p>
+<p *ngIf="token !== ''">Autenticando con token recibido…</p>

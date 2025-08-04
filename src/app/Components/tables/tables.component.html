@@ -1,0 +1,53 @@
+<div class="table-grid-area">
+  <p-table 
+    [value]="tableInfo" 
+    [paginator]="!disablePagination" 
+    [rows]="5" 
+    [rowsPerPageOptions]="[5, 10, 20]" 
+    styleClass="table-striped my-table" 
+    #table>
+
+    <!-- Input de búsqueda -->
+    <ng-template pTemplate="caption" *ngIf="!disableSearch">
+      <div class="boton-busqueda">
+        <label for="busqueda-input">Buscar: </label>
+        <div class="input-container">
+          <i class="pi pi-search"></i>
+          <input style="width: 320px;" pInputText type="text" (input)="buscarTabla($event)" 
+            placeholder="Buscar..." id="busqueda-input" />
+        </div>
+      </div>
+    </ng-template>
+
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let header of headers" pSortableColumn="{{header.field}}" [style.width]="header.width">
+          {{header.label}} <i class="pi pi-sort"></i>
+        </th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+
+    <!-- Body con datos -->
+    <ng-template pTemplate="body" let-rowData>
+      <tr *ngIf="tableInfo.length > 0">
+        <td *ngFor="let header of headers">
+          {{rowData[header.field]}}
+        </td>
+        <td>
+          <div *ngFor="let action of actions">
+            <a (click)="actionFunctions[action.function](rowData.id)">
+              <i [class]="action.icon"></i> {{action.label}}
+            </a>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Placeholder cuando no hay datos -->
+      <tr *ngIf="tableInfo.length === 0">
+        <td [attr.colspan]="headers.length + 1" class="text-center">No hay datos disponibles</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

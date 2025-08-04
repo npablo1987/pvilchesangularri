@@ -1,0 +1,198 @@
+<span class="titulo">Acreditación Agua</span>
+<p-card>
+  <div class="fila-boton" *ngIf="index !== 0">
+    <button class="btn-remove" (click)="onRemoveClick()">
+      <i class="pi pi-trash"></i> Quitar
+    </button>
+  </div>
+  <div class="fila-datos">
+    <div class="columna-datos">
+      <label>Tipo de agua</label>
+      <div *ngIf="activaTipoAgua">
+        <p-dropdown 
+        class="dropdown-large"
+        [options]="groupedTipoAgua" 
+        [(ngModel)]="selectedTipoAgua" 
+        placeholder="Seleccione un tipo de agua" 
+        [group]="true"
+        (onChange)="handleDropdownChange($event)">
+        <ng-template let-group pTemplate="group">
+          <div class="flex align-items-center">
+            <span>{{ group.label }}</span>
+          </div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    
+    <!-- Mostrar input si el valor seleccionado es "otro" -->
+    <div *ngIf="selectedTipoAgua === 'Otra'" class="input-container">
+      <input type="text" [(ngModel)]="otroTipoAgua" placeholder="Escriba el tipo de agua" class="custom-input text-input">
+      <button (click)="clearOtroTipo()" class="clear-btn">x</button>
+    </div>
+  </div>
+  <div class="columna-datos" style="padding: 0 50px;" *ngIf="activaTipoFuente">
+    <label >Tipo de fuente</label>
+    <div>
+      <p-dropdown 
+      class="dropdown-large"
+      [options]="groupedTipoFuente" 
+      [(ngModel)]="selectedTipoFuente" 
+      placeholder="Seleccione un tipo de Fuente" 
+      [group]="true"
+      (onChange)="handleDropdownChangeTipoFuente($event)">
+      <ng-template let-group pTemplate="group">
+        <div class="flex align-items-center">
+          <span>{{ group.label }}</span>
+        </div>
+      </ng-template>
+    </p-dropdown>
+  </div>
+  
+  <!-- Mostrar input si el valor seleccionado es "otro" -->
+  <div *ngIf="selectedTipoFuente === 'Otro' || selectedTipoFuente === 'Otra'" class="input-container">
+    <input type="text" [(ngModel)]="tipoFuente" placeholder="Escriba el tipo de fuente" class="custom-input text-input">
+    <button (click)="clearOtroTipoFuente()" class="clear-btn">x</button>
+  </div>
+</div>
+<div style="display: flex; flex-direction: column; padding: 0 50px;" *ngIf="activaTipoFuente">
+  <label>Detalle tipo de fuente</label>
+  <input type="text" [(ngModel)]="detalleTipoFuente" placeholder="Detalle tipo de fuente" class="text-input" style="width: 328px;">
+</div>
+</div>
+<div class="fila-datos" *ngIf="activaTipoTenencia">
+  <div class="columna-datos">
+    <label for="intrumento-concurso">Tipo de tenencia</label>
+    <p-dropdown class="dropdown-large" (onChange)="reglaTenencia()" [options]="TipoTenenciaOpciones" [(ngModel)]="tipoTenencia" optionLabel="name"
+    placeholder="Propia"/>
+  </div>
+  <div class="columna-datos" style="padding: 0 50px;">
+    <app-input-text style="width: 328px; padding-top: 25px;" [placeholder]="'150'" [(value)]="caudalDisponible" [disable]="false"
+    [label]="'Caudal disponible'" [inputId]="'numeroInput'" [useFormControl]="false" (keyup)="reglaCaudalAgua()">
+  </app-input-text>
+</div>
+<div class="columna-datos" style="padding: 0 50px;">
+  <label for="intrumento-concurso">Unidad de medida caudal</label>
+  <p-dropdown class="dropdown-large" [options]="unidadAgua" [(ngModel)]="unidadMedida" optionLabel="name"
+  placeholder="Litros/Segundo"/>
+</div>
+</div>
+<div class="fila-datos">
+  <div class="columna-datos" *ngIf="activaArticuloAsociado">
+    <label for="intrumento-concurso">Artículo asociado</label>
+    <p-dropdown class="dropdown-large" [options]="articuloAsociadoOpciones" [(ngModel)]="articuloAsociado" optionLabel="name"
+    placeholder="Art. 56"/>
+  </div>
+  <div class="columna-datos" [style.padding.px]="activaArticuloAsociado == true ? '0 50' : '0'" *ngIf="activaEjercicioDerecho">
+    <label for="intrumento-concurso">Ejercicio del derecho</label>
+    <p-dropdown class="dropdown-large" [options]="ejercicioDerechoOpciones" [(ngModel)]="ejercicioDerecho" optionLabel="name"
+    placeholder="Permanente"/>
+  </div>
+  <div class="columna-datos" style="padding: 0 50px;" *ngIf="activaAguaConsultivo">
+    <label>¿Su derecho de agua es consultivo?</label>
+    <br>
+    <div class="fila-datos">
+      <div style="padding: 0 20px;">
+        <p-radioButton name="derechoConsultivo" [value]="true" [(ngModel)]="derechoConsultivo"></p-radioButton>
+        <span class="font-level-7" style="padding-bottom: 20px;">
+          Si
+        </span>          
+      </div>
+      <div style="padding: 0 20px;">
+        <p-radioButton name="derechoConsultivo" [value]="false" [(ngModel)]="derechoConsultivo"></p-radioButton>
+        <span class="font-level-7">
+          No
+        </span>
+      </div>
+    </div>
+  </div>
+  <!-- Mensaje de alerta, si existe -->
+  
+</div>
+<div class="fila-datos" *ngIf="activaAPR">
+  <div class="columna-datos">
+    <label>¿Corresponde a APR?</label>
+    <br>
+    <div class="fila-datos">
+      <div style="padding: 0 20px;">
+        <p-radioButton name="esAPR" [value]="true" [(ngModel)]="esAPR"></p-radioButton>
+        <span class="font-level-7" style="padding-bottom: 20px;">
+          Si
+        </span>          
+      </div>
+      <div style="padding: 0 20px;">
+        <p-radioButton name="esAPR" [value]="false" [(ngModel)]="esAPR"></p-radioButton>
+        <span class="font-level-7">
+          No
+        </span>
+      </div>
+    </div>
+  </div>
+  <div style="display: flex; flex-direction: column; padding: 0 180px;" *ngIf="esAPR">
+    <label>Nombre APR</label>
+    <input type="text" [(ngModel)]="nombreAPR" placeholder="Nombre APR" class="text-input" style="width: 328px;">
+  </div>
+</div>
+<div class="fila-datos" style="padding: 30px 15px;">
+  <div class="columna-datos" style="width: 450px;">
+    <span class="titulo">Carpeta legal de acreditación de agua</span>
+    <span class="subtitulo">Seleccionar archivo</span>
+    <span class="subTexto">Subir archivo máximo 100MB </span>
+    <div style="width: 100%; margin-top: 20px;">
+      <input type="file" id="fileInputAgua{{index}}" accept=".pdf" (change)="onFileSelected($event)" hidden />
+      <button class="botones" (click)="triggerFileInput()">
+        <div class="fila-datos">
+          <span>Elegir archivo</span>
+          <i class="pi pi-plus-circle"></i>
+        </div>
+      </button>
+    </div>
+    <div style="width: 100%; margin-top: 20px;">
+      <button class="button-demanda" (click)="guardarArchivo()">
+        Guardar archivo <i class="pi pi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="columna-datos" style="width: 744px;">
+    <p-table [value]="data.archivosCarpetaLegal" styleClass="table-striped my-table">
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="nombre" style="width: 16%;">Archivo <i class="pi pi-sort"></i></th>
+          <th pSortableColumn="acciones" style="width: 10%;">Acciones <i class="pi pi-sort"></i></th>
+        </tr>
+      </ng-template>
+      
+      <ng-template pTemplate="body" let-archivo>
+        <tr>
+          <td style="width: 15%; padding-left: 8px;">{{ archivo.nombre }}</td>
+          <td style="width: 10%; padding-left: 5px;">
+            <a class="table-link" style="color: #EC313A;" (click)="eliminarArchivo(archivo)">
+              <i class="pi pi-trash"></i> Eliminar 
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<div
+class="alert-box alert-error"
+*ngIf="alertaCaudalAgua"
+>
+<div class="alert-header">
+  <span class="alert-title">
+    Caudal excedido
+  </span>
+  <button
+  type="button"
+  class="alert-close"
+  aria-label="Cerrar alerta"
+  >
+  &times;
+</button>
+</div>
+<div class="alert-body">
+  El caudal registrado excede lo estipulado en la normativa vigente relacionadas con el artículo 56 del Código de Aguas
+</div>
+</div>
+</p-card>

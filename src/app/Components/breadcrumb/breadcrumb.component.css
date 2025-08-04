@@ -1,0 +1,60 @@
+.toolbar {
+  display: flex;
+  justify-content: end;
+}
+
+.miga-de-pan {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #373737;
+  text-decoration: none;
+}
+
+.pan {
+  display: flex;
+  flex-direction: column;
+}
+
+.toolbar-btn {
+  border-color: black;
+  margin: 0 10px;
+}
+
+.toolbar-btn:active {
+  border-color: gray;
+}
+
+.breadcrumb-grid-area {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px 15px;
+  grid-area: header;
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+:host ::ng-deep .p-menuitem-link {
+  text-decoration: none;
+}
+
+:host ::ng-deep .p-breadcrumb  {
+  border: 0px;
+}
+
+.text-gray-500 {
+  color: gray;
+}
+
+.migas {
+  display: flex;
+  flex-direction: row;
+}
+
+ 

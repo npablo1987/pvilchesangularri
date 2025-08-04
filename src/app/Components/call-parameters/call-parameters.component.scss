@@ -1,0 +1,300 @@
+.call-parameters-grid-area { 
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 12px 15px;
+  grid-area: 'call-parameters';
+}
+
+.title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+  margin: 20px 0px;
+}
+
+.form-inputs {
+  margin-bottom: 15px;
+}
+
+.text-input {
+  padding: 8px 12px;
+  gap: 8px;
+  border: 1px solid #000000;
+  width: 97.5%;
+}
+
+label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-inputnumber-input {
+  padding: 8px 12px;
+  gap: 8px;
+  border: 1px solid #000000;
+  width: 360px;
+}
+
+:host ::ng-deep .p-dropdown  {
+  gap: 8px;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  width: 360px;
+}
+
+:host ::ng-deep .p-calendar  {
+  gap: 8px;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  width: 360px;
+}
+
+select {
+  gap: 8px;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  width: 360px;
+  height: 40px;
+}
+
+:host ::ng-deep .p-datepicker-hidden {
+  display: none !important;
+}
+
+:host ::ng-deep .p-divider {
+  width: 1250px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-new { 
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-publish { 
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  height: 40px;
+}
+
+.button-new .btn-primary {
+  background-color: var(--Blanco-Base, #FFFFFF);
+  border: 2px solid #1565C0; 
+  color: #1565C0; 
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.button-publish .btn-save .pi {
+  margin-right: 8px;
+  width: 24px;
+}
+
+.input-container {
+  position: relative;
+  display: inline-block;
+}
+
+.input-container .icon {
+  position: absolute;
+  right: 55px;
+  top: 72%;
+  transform: translateY(-50%);
+  pointer-events: none; 
+}
+
+.input-container .p-inputnumber {
+  padding-right: 30px;
+}
+
+.botones {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 7px;
+  height: 40px;
+}
+
+.button-publicar {
+  background-color: #0051A8;
+  color:#FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+}
+
+.boton-publicar {
+  display: flex;
+  flex-direction: column;
+  height: 40px;
+}
+
+.button-publicar:disabled {
+  background-color: #d3d3d3; 
+  cursor: not-allowed; 
+  border: 0px;
+  color: gray;
+}
+
+.title-form-inputs {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+}
+
+.badge.font-level-7 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  text-align: center;
+  background: var(--Info-Lighten-5, #E3F2FD);
+  color: #1565C0; 
+  border-radius: 24px;
+  margin: 0 15px;
+}
+
+.badge.badge-success {
+  background: #C8E6C9;
+  color: #388E3C;
+}
+
+.badge-pending {
+  background: var(--Info-Lighten-5, #E3F2FD); 
+  color: #1565C0;
+}
+
+.badge.badge-danger {
+  background: #FFEBEF;
+  color: #FB3B3B; 
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: row;
+  padding: 20px;
+  border: 2px solid #FB3B3B;
+  opacity: 1;
+}
+
+.descripcion {
+  display: flex;
+  justify-content: start;
+  flex-direction: column;
+  margin: 0px 10px;
+  width: 100%;
+}
+
+.icono{
+  display: flex;               
+  justify-content: center;      
+  align-items: center;  
+  padding: 30px;      
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.nombre-concurso {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+
+.button-publicar {
+  background-color: #0051A8;
+  color: #FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-publish {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+
+.subtitle-dialog {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.dialog-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  padding: 25px 25px 0px 15px;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  padding: 5px 15px 15px 15px;
+}
+
+:host ::ng-deep .p-divider {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.custom-textarea {
+  width: 528px; 
+  height: 64px; 
+  padding: 8px 12px; 
+  gap: 8px;
+  border: 1px solid black;  
+  border-color: black; 
+  opacity: 1;  
+  resize: none;  
+}
+
+.radio-dialog {
+  display: flex;
+  flex-direction: column;  
+}

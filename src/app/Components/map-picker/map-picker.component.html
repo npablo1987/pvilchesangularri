@@ -1,0 +1,37 @@
+<div
+*ngIf="visible"
+class="modal-overlay"
+role="dialog"
+aria-hidden="false">
+<div class="modal__box-container">
+    <div class="modal__box">
+        <button class="close-modal" aria-label="Cerrar" (click)="close()">
+            <i class="fa fa-times"></i>
+        </button>
+        
+        <h2 class="modal__title">Ubicación del servicio</h2>
+        <p class="lead">
+            Por favor posicione geográficamente su predio: mueva el mapa y ubique la cruz roja
+            en el centro de su propiedad.
+        </p>
+        
+        <div class="map_canvas">
+            <google-map
+            [height]="'100%'"
+            [width]="'100%'"
+            [center]="center"
+            [zoom]="zoom"
+            (mapClick)="onMapClick($event)">
+            <map-marker
+            [position]="markerPosition!"
+            [options]="markerOptions">
+        </map-marker>
+    </google-map> 
+</div>
+
+<button class="btn-save" (click)="save()">
+    Guardar y continuar
+</button>
+</div>
+</div>
+</div>

@@ -1,0 +1,409 @@
+  <div style="width: 1140px;">
+
+    <div class="fila-datos" style="padding-top: 30px;">
+    <span class="titulo">Presupuesto del proyecto</span>
+    </div>
+    <div class="fila-datos" style="padding-top: 30px; width: 840px;">
+    <div class="columna-datos">
+    <!-- A -->
+    <div class="div-presupuesto row-white">
+    <label class="bold-text">A. Total costo directo de ejecución del proyecto</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="totalDirecto"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="onChangeTotalDirecto()"
+    ></app-input-number>
+    </div>
+    <!-- B -->
+    <div class="div-presupuesto row-gray">
+    <label class="budget-text">B. Utilidad (10% C. Directo)</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="utilidad"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           [disable]="'second'"
+    ></app-input-number>
+    </div>
+    <!-- C -->
+    <div class="div-presupuesto row-white">
+    <label class="budget-text">C. Gastos de generales e imprevistos (5% C. Directo)</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="generalesImprevistos"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           [disable]="'second'"
+    ></app-input-number>
+    </div>
+    <!-- D -->
+    <div class="div-presupuesto row-gray">
+    <label class="budget-text">D. I.V.A. 19% (A+B+C)</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="iva"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+            [disable]="'second'"
+    ></app-input-number>
+    </div>
+    <!-- E -->
+    <div class="div-presupuesto row-white">
+    <label class="bold-text">E. Costo Total Ejecución del Proyecto</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="costoTotalEjecucion"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+            [disable]="'second'"
+    ></app-input-number>
+    </div>
+    <!-- F y G: usar *ngIf="mostrarFG" -->
+    <div class="div-presupuesto row-gray" *ngIf="mostrarFG">
+    <label class="budget-text">F. Apoyo Formulación del Proyecto</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="apoyoFormulacion"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="calcularCostoTotalProyecto()"
+    ></app-input-number>
+    </div>
+    <div class="div-presupuesto row-white" *ngIf="mostrarFG">
+    <label class="budget-text">G. Apoyo a la ejecución y/o capacitación</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="apoyoEjecucion"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="calcularCostoTotalProyecto()"
+    ></app-input-number>
+    </div>
+    <!-- H e I: usar *ngIf="mostrarHI" -->
+    <div class="div-presupuesto row-gray" *ngIf="mostrarHI">
+    <label class="budget-text">H. Apoyo Formulación del Proyecto IVA 19% incluido</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="apoyoFormulacionIVA"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="calcularCostoTotalProyecto()"
+    ></app-input-number>
+    </div>
+    <div class="div-presupuesto row-white" *ngIf="mostrarHI">
+    <label class="budget-text">I. Apoyo a la ejecución y/o capacitación IVA 19% incluido</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="apoyoEjecucionIVA"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="calcularCostoTotalProyecto()"
+    ></app-input-number>
+    </div>
+    <!-- Costo total del proyecto -->
+    <div class="div-presupuesto row-black total">
+    <label class="bold-text">Costo total del proyecto</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="costoTotalProyecto"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+    ></app-input-number>
+    </div>
+    </div>
+    </div>
+    <!-- Incentivos solicitados -->
+    <div class="fila-datos" style="padding-top: 50px;">
+    <span class="titulo">Incentivos solicitados y aporte propio</span>
+    </div>
+    <div class="fila-datos" style="padding-top: 30px; width: 1128px;">
+    <div class="columna-datos">
+    <div class="div-presupuesto row-white">
+    <label class="bold-text">Incentivo de inversión</label>
+    <!-- % -->
+    <app-input-number
+           style="padding-left: 24rem; padding-right: 0.6rem;"
+           [width]="'103px'"
+           [height]="'40px'"
+           [(value)]="porcentajeIncentivoInversion"
+           [tipo]="'porcentaje'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarMonto(porcentajeIncentivoInversion, 'inversion')"
+    ></app-input-number>
+    <!-- Monto -->
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="incentivoInversion"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarPorcentaje(incentivoInversion, 'inversion')"
+    ></app-input-number>
+    </div>
+    <div class="div-presupuesto row-gray">
+    <label class="budget-text">Incentivo de formulación</label>
+    <app-input-number
+           style="padding-left: 23rem;"
+           [width]="'103px'"
+           [height]="'40px'"
+           [(value)]="porcentajeIncentivoFormulacion"
+           [tipo]="'porcentaje'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarMonto(porcentajeIncentivoFormulacion, 'formulacion')"
+    ></app-input-number>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="incentivoFormulacion"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarPorcentaje(incentivoFormulacion, 'formulacion')"
+    ></app-input-number>
+    </div>
+    <div class="div-presupuesto row-white">
+    <label class="budget-text">Incentivo de ejecución y/o capacitación</label>
+    <app-input-number
+           style="padding-left: 16.5rem;"
+           [width]="'103px'"
+           [height]="'40px'"
+           [(value)]="porcentajeIncentivoEjecucion"
+           [tipo]="'porcentaje'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarMonto(porcentajeIncentivoEjecucion, 'ejecucion')"
+    ></app-input-number>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="incentivoEjecucion"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarPorcentaje(incentivoEjecucion, 'ejecucion')"
+    ></app-input-number>
+    </div>
+    <div class="div-presupuesto row-gray">
+    <label class="budget-text">Incentivo de apoyo a la participación</label>
+    <app-input-number
+           style="padding-left: 17.5rem;"
+           [width]="'103px'"
+           [height]="'40px'"
+           [(value)]="porcentajeIncentivoApoyo"
+           [tipo]="'porcentaje'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarMonto(porcentajeIncentivoApoyo, 'apoyo')"
+    ></app-input-number>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="incentivoApoyo"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="actualizarPorcentaje(incentivoApoyo, 'apoyo')"
+    ></app-input-number>
+    </div>
+    <!-- Incentivo total -->
+    <div class="div-presupuesto row-white">
+    <label class="bold-text">INCENTIVO TOTAL</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="incentivoTotal"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+    ></app-input-number>
+    </div>
+    <!-- Aporte propio -->
+    <div class="div-presupuesto row-gray">
+    <label class="bold-text">APORTE PROPIO</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="aportePropio"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+           (input)="calcularIncentivoTotal()"
+    ></app-input-number>
+    </div>
+    <!-- Total final -->
+    <div class="div-presupuesto row-black total">
+    <label class="bold-text">Total</label>
+    <app-input-number
+           [width]="'297px'"
+           [height]="'40px'"
+           [(value)]="totalIncentivos"
+           [tipo]="'CLP'"
+           [useFormControl]="false"
+           [label]="''"
+    ></app-input-number>
+    </div>
+    </div>
+    </div>
+    <!-- Mensaje de alerta, si existe -->
+    <div class="alerta" *ngIf="mensajeAlerta" style="color: red; margin-top: 20px;">
+     {{ mensajeAlerta }}
+    </div>
+    <div class="fila-datos" style="padding-top: 40px;">
+    <span class="titulo">Documentación oficial</span>
+    </div>
+    
+    <!-- apartado documentos-->
+    <div class="fila-datos" style="padding: 15px 60px 15px 0;">
+      <div class="columna-datos" style="padding: 10px 30px;">
+        <span class="subtitulo">Declaración de selección del consultor.</span>
+        <span class="subTexto" style="width: 343px;"><a href="#">Descarga el formato </a>tipo y luego adjunta la versión firmada por el usuario:</span>
+    
+        <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo 5MB</span>
+    
+        <div style="width: 100%;" *ngIf="mostrarNombreArchivoDeclaracionJurada">
+           <span class="subtitulo">{{ nombreArchivoDeclaracionJurada }} <i class="pi pi-file-pdf"></i></span>
+        </div>
+        <div style="width: 100%;" *ngIf="!mostrarNombreArchivoDeclaracionJurada">
+        <input type="file" id="declaracionSeleccionConsultor" accept=".pdf" (change)="declaracionSeleccionConsultor($event)" hidden />
+        <button class="botones" (click)="triggerFileInput('declaracionSeleccionConsultor')">
+          <div class="fila-datos">
+            <span>Cargar archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button> 
+      </div>
+      </div>
+      <div class="columna-datos" style="padding: 10px 30px;">
+        <span class="subtitulo">Declaración de selección del contratista.</span>
+        <span class="subTexto" style="width: 343px;"><a href="#">Descarga el formato </a>tipo y luego adjunta la versión firmada por el usuario:</span>
+    
+        <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo 5MB</span>
+    
+        <div style="width: 100%;" *ngIf="mostrarNombreArchivoDeclaracionContratista">
+           <span class="subtitulo">{{ nombreArchivoDeclaracionContratista }} <i class="pi pi-file-pdf"></i></span>
+        </div>
+        <div style="width: 100%;" *ngIf="!mostrarNombreArchivoDeclaracionContratista">
+        <input type="file" id="declaracionSeleccionContratista" accept=".pdf" (change)="seleccionContratista($event)" hidden />
+        <button class="botones" (click)="triggerFileInput('declaracionSeleccionContratista')">
+          <div class="fila-datos">
+            <span>Cargar archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button> 
+      </div>
+      </div>
+      <div class="columna-datos" style="padding: 10px 30px;">
+        <span class="subtitulo">Autorización de pago consultor.</span>
+        <span class="subTexto" style="width: 343px;"><a href="#">Descarga el formato </a>tipo y luego adjunta la versión firmada por el usuario:</span>
+    
+        <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo 5MB</span>
+    
+        <div style="width: 100%;" *ngIf="mostrarNombreArchivoAutorizacionPagoConsultor">
+           <span class="subtitulo">{{ nombreArchivoAutorizacionPagoConsultor }} <i class="pi pi-file-pdf"></i></span>
+        </div>
+        <div style="width: 100%;" *ngIf="!mostrarNombreArchivoAutorizacionPagoConsultor">
+        <input type="file" id="autoriacionPagoConsultor" accept=".pdf" (change)="autorizacionPagoConsultor($event)" hidden />
+        <button class="botones" (click)="triggerFileInput('autoriacionPagoConsultor')">
+          <div class="fila-datos">
+            <span>Cargar archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button> 
+      </div>
+      </div>
+    </div>
+    <div class="fila-datos" style="padding: 15px 60px 15px 0;">
+      <div class="columna-datos" style="padding: 10px 30px;">
+        <span class="subtitulo">Autorización de pago contratista.</span>
+        <span class="subTexto" style="width: 343px;"><a href="#"></a>Declaración de cumplimiento de requisitos para solicitud de incentivos firmado:</span>
+    
+        <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo 5MB</span>
+    
+        <div style="width: 100%;" *ngIf="mostrarNombreArchivoAutorizacionPagoContratista">
+           <span class="subtitulo">{{ nombreArchivoAutorizacionPagoContratista }} <i class="pi pi-file-pdf"></i></span>
+        </div>
+        <div style="width: 100%;" *ngIf="!mostrarNombreArchivoAutorizacionPagoContratista">
+        <input type="file" id="autorizacionPagoContratista" accept=".pdf" (change)="autorizacionPagoContratista($event)" hidden />
+        <button class="botones" (click)="triggerFileInput('autorizacionPagoContratista')">
+          <div class="fila-datos">
+            <span>Cargar archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button> 
+      </div>
+      </div>
+      <div class="columna-datos" style="padding: 10px 30px;">
+        <span class="subtitulo">Declaración Simple.</span>
+        <span class="subTexto" style="width: 343px;"><a href="#">Descarga el formato </a>tipo y luego adjunta la versión firmada por el usuario:</span>
+    
+        <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo 5MB</span>
+    
+        <div style="width: 100%;" *ngIf="mostrarNombreArchivoDeclaracionSimple">
+           <span class="subtitulo">{{ nombreArchivoDeclaracionSimple }} <i class="pi pi-file-pdf"></i></span>
+        </div>
+        <div style="width: 100%;" *ngIf="!mostrarNombreArchivoDeclaracionSimple">
+        <input type="file" id="declaracionSimple" accept=".pdf" (change)="declaracionSimple($event)" hidden />
+        <button class="botones" (click)="triggerFileInput('declaracionSimple')">
+          <div class="fila-datos">
+            <span>Cargar archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button> 
+      </div>
+      </div>
+      <div class="columna-datos" style="padding: 10px 30px;">
+      <span class="subtitulo">Carta de compromiso.</span>
+      <span class="subTexto" style="width: 343px;">
+        <a href="#"></a>Carta de compromiso firmado:
+      </span>
+    
+      <span class="subTexto" style="padding: 15px 0;">Subir archivo máximo 5MB</span>
+    
+        <div style="width: 100%;" *ngIf="mostrarNombreArchivoCartaCompromiso">
+           <span class="subtitulo">{{ nombreArchivoCartaCompromiso }} <i class="pi pi-file-pdf"></i></span>
+        </div>
+      <div style="width: 100%;" *ngIf="!mostrarNombreArchivoCartaCompromiso">
+        <input type="file" id="cartaCompromiso" accept=".pdf" (change)="cartaCompromiso($event)" hidden />
+        <button class="botones" (click)="triggerFileInput('cartaCompromiso')">
+          <div class="fila-datos">
+            <span>Cargar archivo</span>
+            <i class="pi pi-plus-circle"></i>
+          </div>
+        </button>
+      </div>
+    </div>
+    
+    <app-confirmacion-dialog
+      [display]="mostrarDialog"
+      [isSuccess]="esExito"
+      [successMessage]="mensajeExito"
+      [errorMessage]="mensajeError"
+      (onConfirm)="onConfirmar()"
+      (onClose)="onCerrar()"
+    ></app-confirmacion-dialog>
+  </div>

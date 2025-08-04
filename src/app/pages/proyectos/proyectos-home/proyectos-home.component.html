@@ -1,0 +1,83 @@
+<app-header></app-header>
+<div class="proyectos-home-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Proyectos'" [subtitle]="esEvaluador ? '' : subtitle" [boton]="'Proyectos'"></app-title>
+  <p-table #dt [value]="proyectos" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5, 10, 20]"
+    [globalFilterFields]="['usuario', 'nombreEjecutivo', 'rut', 'instrumento', 'agencia', 'fechaCreacion', 'estado']"
+    styleClass="table-striped my-table">
+    <ng-template pTemplate="caption">
+      <div class="boton-busqueda">
+        <label for="busqueda-input">Buscar: </label>
+        <div class="input-container">
+          <i class="pi pi-search"></i>
+          <input style="width: 320px;" pInputText type="text" (input)="buscarTabla($event)" placeholder="Buscar..."
+            id="busqueda-input" />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="usuario" style="width: 16%;">
+          Usuario <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="rut" style="width: 10%;">
+          RUT <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="instrumento" style="width: 5%;">
+          Inst. <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="codigoProyecto" style="width: 8%;">
+          Cod. Proy. <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="Llamado" style="width: 20%;">
+          Llamado <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="area" style="width: 8%;">
+          Área <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="postulacion" style="width: 10%;">
+          Postulación <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="estado" style="width: 5%;">
+          Estado <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="acciones" style="width: 5%;">
+          Acciones
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-index="rowIndex">
+      <tr>
+        <td style="width: 15%; padding-left: 8px;">{{ rowData.general?.antecedentesPostulante?.nombre }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.general?.antecedentesPostulante?.rut }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.demanda?.instrumento }}</td>
+        <td style="width: 3%; padding-left: 0px;">{{ rowData.id }}</td>
+        <td style="width: 15%; padding-left: 0px;">
+          <a class="table-link" [routerLink]="['/proyectos-priorizacion', rowData.concurso?.internalid]">
+            {{ rowData.concurso?.nombre }}
+          </a>
+        </td>
+        <td style="width: 8%; padding-left: 5px;">{{ rowData.demanda?.agencia }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.fechaCreacion | date:'dd-MM-yyyy' }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.estado }}</td>
+        <td style="width: 10%; padding-left: 5px; position: relative;">
+          <a class="table-link" (click)="toggleLinks(rowData.internalid, rowData.id, $event, index, rowData.estado)">
+            <i class="pi pi-cog"></i> Acciones
+          </a>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+  <div *ngIf="showLinksMap.get(selectedProyectoId)" class="additional-links" [ngStyle]="dialogPosition">
+    <a (click)="verProyecto(selectedProyectoId)" style="color: #0051A8;"><i class="pi pi-folder"></i> Ver proyecto</a>
+    <a (click)="verDemanda()" style="color: #0051A8;"><i class="pi pi-eye"></i> Ver demanda</a>
+    <a *ngIf="!esEstadoAsignado(selectedProyectoId)" (click)="asignarProyecto(selectedProyectoId)" style="color: #0051A8;"><i class="pi pi-id-card"></i> Asignar</a>
+    <a *ngIf="esEstadoAsignado(selectedProyectoId)" (click)="asignarProyecto(selectedProyectoId)" style="color: #0051A8;"><i class="pi pi-undo"></i> Reasignar</a>
+  </div>
+
+  <app-asignar-proyecto-dialog
+    [displayDialog]="asignarDialog"
+    [idProyectoBorrador]="selectedProyectoId"
+    (onClose)="onDialogClose()"
+  ></app-asignar-proyecto-dialog>

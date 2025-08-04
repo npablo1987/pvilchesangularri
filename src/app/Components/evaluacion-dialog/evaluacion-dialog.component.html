@@ -1,0 +1,92 @@
+<p-dialog header="Proyecto" [(visible)]="displayDialog" modal="modal" [closable]="true" [style]="{ width: '36rem', height: '36rem' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Evaluación del proyecto</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+
+  <div class="fila-revision">
+    <div class="col" style="padding: 0px">
+    <label>Criterio de sustentabilidad agroambiental:</label>
+    <br>
+    <p-radioButton name="estadoEvaluacion" [value]="true" [(ngModel)]="evaluacionFavorable"></p-radioButton>
+    <span class="font-level-7" style="padding-bottom: 20px;">
+      Recomendación favorable
+    </span>
+    <br>
+    <p-radioButton name="estadoEvaluacion" [value]="false" [(ngModel)]="evaluacionFavorable"></p-radioButton>
+    <span class="font-level-7">
+      Presenta observaciones
+    </span>
+  </div>
+  </div>
+<div *ngIf="evaluacionFavorable">
+      <p-divider></p-divider>
+      <div class="columna-revision">
+        <label>Pauta de evaluación</label>
+        <span class="font-level-7">Junto a cada criterio, se muestra un antecedente del proyecto, para facilitar el ingreso de la evaluación.</span>
+      </div>
+      <p-divider></p-divider>
+<div *ngFor="let criterio of concursoCriterios">
+    <div class="fila-revision" style="margin-top: 10px;">
+      <div class="col" style="padding: 0px">
+        <label>{{ criterio.nombre }} ({{ criterio.ponderacion }}%):</label>
+        <br>
+        <div *ngFor="let variable of criterio.variables">
+          <p-radioButton 
+            [name]="criterio.nombre" 
+            [value]="variable.puntaje"
+            [(ngModel)]="selectedOptions[criterio.nombre]">
+          </p-radioButton>
+          <span class="font-level-7">
+            {{ variable.nombre }} ({{ variable.puntaje }} pts)
+          </span>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </div>
+
+  <div *ngIf="!evaluacionFavorable">
+    <div class="fila-revision">
+      <div class="columna-revision">
+        <label>Observaciones:</label>
+        <textarea class="custom-textarea" [(ngModel)]="observacionesEvaluacion" rows="5" cols="30" 
+        placeholder="Favor corregir los antecedentes presupuestarios. Faltan cotizaciones para las actividades A y B.">
+        </textarea>
+      </div>
+    </div>
+    <div class="fila-revision">
+      <div class="columna-revision">
+        <label>Entrega de observaciones:</label>
+        <span>{{ fechaObservaciones }}</span>
+      </div>
+    </div>
+    <div class="fila-revision">
+      <div class="columna-revision">
+        <label>Plazo para corregir:</label>
+        <span>{{ fechaPlazo }} 23:59</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-content">
+ 
+    <div class="button-publish" style="margin-top: 20px;">
+      <button class="button-publicar" (click)="guardarEvaluacion()">
+       Guardar Evaluación <i class="pi pi-angle-right" style="padding-left: 10px;"></i>
+      </button>
+    </div>
+  </div>
+</p-dialog>
+<!-- 
+<app-confirmacion-dialog
+  [display]="mostrarDialog"
+  [isSuccess]="esExito"
+  [successMessage]="'Se ha asignado correctamente el proyecto.'"
+  [errorMessage]="'No se puede asignar el mismo usuario para su revisión.'"
+  (onConfirm)="onConfirmar()"
+  (onClose)="onCerrar()"
+></app-confirmacion-dialog> -->

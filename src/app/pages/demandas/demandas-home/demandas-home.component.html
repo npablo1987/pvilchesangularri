@@ -1,0 +1,87 @@
+<app-header></app-header>
+<div class="demandas-home-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Demandas'" [subtitle]="subtitle" [boton]="'Demandas'"></app-title>
+  <p-table #dt [value]="demandas" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]"
+    [globalFilterFields]="['usuario', 'nombreEjecutivo', 'rut', 'instrumento', 'agencia', 'fechaCreacion', 'estado']"
+    styleClass="table-striped my-table">
+    <ng-template pTemplate="caption">
+      <div class="boton-busqueda">
+        <label for="busqueda-input">Buscar: </label>
+        <div class="input-container">
+          <i class="pi pi-search"></i>
+          <input style="width: 320px;" pInputText type="text" (input)="buscarTabla($event)" placeholder="Buscar..."
+            id="busqueda-input" />
+        </div>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <tr>
+        <th pSortableColumn="usuario" style="width: 16%;">
+          Usuario <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="nombreEjecutivo" style="width: 15%;">
+          Nombre Ejecutivo <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="rut" style="width: 10%;">
+          RUT <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="instrumento" style="width: 8%;">
+          Instrumento <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="agencia" style="width: 10%;">
+          Agencia de Área <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="fechaCreacion" style="width: 10%;">
+          Fecha creación <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="estado" style="width: 5%;">
+          Estado <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="conProyecto" style="width: 10%;">
+          Con Proyecto <i class="pi pi-sort"></i>
+        </th>
+        <th pSortableColumn="acciones" style="width: 5%;">
+          Acciones
+        </th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-rowData let-index="rowIndex">
+      <tr>
+        <td style="width: 15%; padding-left: 8px;">{{ rowData.usuario }}</td>
+        <td style="width: 15%; padding-left: 5px;">{{ rowData.nombreEjecutivo }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.rut }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.instrumento }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.agencia }}</td>
+        <td style="width: 5%; padding-left: 5px;">{{ rowData.fechaCreacion | date:'dd-MM-yyyy' }}</td>
+        <td style="width: 10%; padding-left: 5px;">{{ rowData.estado }}</td>
+        <td style="width: 10%; text-align: center; padding-right: 50px;">
+          <span *ngIf="rowData.conProyecto % 2 === 0" style="color: #4CAF50">
+            <i class="pi pi-check-circle"></i>
+            Si
+          </span>
+          <span *ngIf="rowData.conProyecto % 2 !== 0" style="color: #666666">
+            <i class="pi pi-minus-circle"></i>
+            No
+          </span>
+        </td>
+        <td style="width: 10%; padding-left: 5px;">
+          <a class="table-link" (click)="toggleLinks(rowData.internalid, $event)">
+              <i class="pi pi-cog"></i> Acciones
+            </a>
+            <div *ngIf="showLinksMap.get(rowData.internalid)" class="additional-links">
+              <div *ngIf="rowData.estado === 'ADMISIBLE'">
+                <a (click)="verDemanda(rowData.internalid)"><i class="pi pi-search"></i> Ver Demanda</a>
+              </div>
+              <div *ngIf="rowData.estado !== 'ADMISIBLE'">
+                <a (click)="verDemanda(rowData.internalid)"><i class="pi pi-search"></i> Ver Demanda</a>
+                <a (click)="editarDemanda(rowData.internalid)"><i class="pi pi-eye"></i> Editar</a>
+                <a (click)="eliminarDemanda(rowData.internalid)" style="color: #FB3B3B;"><i class="pi pi-trash"></i> Eliminar</a>
+              </div>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

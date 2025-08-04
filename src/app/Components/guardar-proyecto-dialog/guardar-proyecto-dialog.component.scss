@@ -1,0 +1,150 @@
+.icono{
+  display: flex;               
+  justify-content: center;      
+  align-items: center;  
+  padding: 30px;      
+  margin-right: 20px;
+  width: 30px;
+  height: 30px;
+}
+
+.nombre-concurso {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+
+.button-publicar {
+  background-color: #0051A8;
+  color: #FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-publish {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 20px;
+}
+
+.subtitle-dialog {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.dialog-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  padding: 25px 25px 0px 15px;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  padding: 5px 15px 15px 15px;
+}
+
+:host ::ng-deep .p-divider {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.custom-textarea {
+  width: 528px; 
+  height: 64px; 
+  padding: 8px 12px; 
+  gap: 8px;
+  border: 1px solid black;  
+  border-color: black; 
+  opacity: 1;  
+  resize: none;  
+}
+
+.radio-dialog {
+  display: flex;
+  flex-direction: column;  
+}
+
+.botones {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 7px;
+  height: 40px;
+}
+
+.button-new { 
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Mensaje de éxito */
+.custom-message {
+  display: flex;
+  align-items: center;
+  width: 518px;
+  height: 68px;
+  background-color: #fff;
+  border: 3px solid #4CAF50;
+  border-radius: 5px;
+  gap: 16px;
+}
+
+.custom-message .pi {
+  font-size: 30px;
+  color: #4CAF50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding-left: 15px;
+}
+
+.text-container {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+/* Mensaje de error */
+.error-message {
+  border: 3px solid #FB3B3B;
+}
+
+.error-message .pi {
+  color: #FB3B3B;
+}

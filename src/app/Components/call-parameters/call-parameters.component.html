@@ -1,0 +1,187 @@
+<div [formGroup]="concursoForm" class="call-parameters-grid-area">
+  <div class="card-detail" style="width: 90%;" *ngIf="motivoRechazo">
+    <div class="icono">
+        <img src="assets/InfoRed.png" alt="Logo" />
+    </div>
+    <div class="descripcion">
+      <span class="font-level-5" style="font-weight: 500;"> Motivo del rechazo </span>
+      <span class="font-level-7" style="margin-top: 10px;">{{ motivoRechazo }}</span>
+    </div>
+  </div>
+  <div class="title-form-inputs">
+    <span class="title">Parámetros del concurso</span>
+    <span class="font-level-6" style="margin-right: 15px; padding-top: 30px;" *ngIf="editar || aprobacion">
+      ID {{concursoID}}
+      <app-chip [text]="textoChip" [color]="chipColor"></app-chip>
+    </span>
+  </div>
+  <div class="row form-inputs">
+    <div class="col" style="display: flex; flex-direction: column;">
+      <label for="nombre-concurso">Nombre del Concurso</label>
+      <input id="nombre-concurso" class="text-input" type="text" pInputText formControlName="nombreConcurso"
+        placeholder="Concurso de Riego para los Afectados del Incendio del año 2012 de Ranquil" />
+    </div>
+  </div>
+  <div class="row form-inputs">
+    <div class="col">
+      <label for="fondo-concurso">Fondos del concurso:</label>
+      <p-dropdown [options]="fondoConcurso" formControlName="selectedFondo" optionLabel="name"
+        placeholder="Seleccione un fondo de concurso" />
+    </div>
+    <div class="col">
+      <label for="intrumento-concurso">Instrumento:</label>
+      <p-dropdown [options]="instrumentoConcurso" formControlName="selectedInstrumento" optionLabel="name"
+        placeholder="Seleccione un instrumento" />
+    </div>
+    <div class="col">
+      <label for="tipo-concurso">Tipo de concurso:</label>
+      <p-dropdown [options]="tipoConcurso" formControlName="selectedTipoConsurso" optionLabel="name"
+        placeholder="Seleccione un tipo" />
+    </div>
+  </div>
+  <div class="row form-inputs">
+    <div class="col input-container" style="display: flex; flex-direction: column;">
+      <label for="presupuesto-concurso">Presupuesto del concurso:</label>
+      <p-inputNumber inputId="presupuesto-concurso" formControlName="presupuestoConcurso" />
+      <img src="assets/MoneySymbol.png" class="icon" />
+    </div>
+    <div class="col input-container" style="display: flex; flex-direction: column;">
+      <label for="monto-maximo">Monto máximo incentivo:</label>
+      <p-inputNumber inputId="monto-maximo" formControlName="montoMaximo">
+      </p-inputNumber>
+      <img src="assets/MoneySymbol.png" class="icon" />
+    </div>
+    <div class="col input-container" style="display: flex; flex-direction: column;">
+      <label for="porcentaje-maximo">Porcentaje máximo incentivo:</label>
+      <p-inputNumber id="porcentaje-maximo" formControlName="porcentajeMaximo" />
+      <img src="assets/Porcent.png" class="icon" />
+    </div>
+  </div>
+  <div class="row form-inputs">
+    <div class="col">
+      <label for="fecha-inicio">Fecha y hora inicio postulación</label>
+      <p-calendar dateFormat="dd/mm/yy" formControlName="fechaInicioPostulacion" [iconDisplay]="'input'"
+        [showIcon]="true" inputId="fecha-inicio" placeholder="Inicio postulacion" [showTime]="true" 
+        [hourFormat]="'24'"/>
+    </div>
+    <div class="col">
+      <label for="fecha-cierre">Fecha y hora cierre postulación</label>
+      <p-calendar dateFormat="dd/mm/yy" formControlName="fechaCierrePostulacion" [iconDisplay]="'input'"
+        [showIcon]="true" inputId="fecha-cierre" placeholder="Cierre postulacion" [showTime]="true" 
+        [hourFormat]="'24'"/>
+    </div>
+    <div class="col">
+      <label for="fecha-resultados">Fecha estimada resultados finales</label>
+      <p-calendar dateFormat="dd/mm/yy" formControlName="fechaEstimadaResultados" [iconDisplay]="'input'"
+        [showIcon]="true" inputId="fecha-resultados" placeholder="Fecha Estimada" [showTime]="true" 
+        [hourFormat]="'24'"/>
+    </div>
+  </div>
+  <div class="row form-inputs">
+    <div class="col">
+      <label>Año de ejecución presupuestaria</label>
+      <br>
+      <p-radioButton name="anio" value="2024" formControlName="anio"></p-radioButton>
+      <span class="font-level-7">
+        2025
+      </span>
+      <br>
+      <p-radioButton name="anio" value="2025" formControlName="anio"></p-radioButton>
+      <span class="font-level-7">
+        2026
+      </span>
+    </div>
+    <div class="col">
+      <label>¿Es un llamado de operación temprana?</label>
+      <br>
+      <p-radioButton name="operacionTemprana" value="si" formControlName="operacionTemprana">a</p-radioButton>
+      <span class="font-level-7">
+        Sí
+      </span>
+      <br>
+      <p-radioButton name="operacionTemprana" value="no" formControlName="operacionTemprana"></p-radioButton>
+      <span class="font-level-7">
+        No
+      </span>
+    </div>
+    <div class="col"></div>
+  </div>
+  <div class="row form-inputs">
+    <app-criterios [selectedInstrumento]="instrumentoSeleccionado" [criteriosEditar]="criteriosEditar"
+      (criteriosChange)="onCriteriosChange($event)" [criteriosAprobar]="criteriosAprobar"></app-criterios>
+  </div>
+  <div class="row form-inputs">
+    <app-resolucion [codigoResolucionInput]="codigoResolucion" (codigoResolucionEmitido)="manejarCodigoResolucion($event)"></app-resolucion>
+  </div>
+  <div class="row form-inputs">
+    <app-focalizacion (focalizacionChange)="onFocalizacionChange($event)" [disableFocalizacion]="disableFocalizacion"
+      [focalizacion]="focalizacion"></app-focalizacion>
+  </div>
+  <p-divider />
+  <div class="row form-inputs">
+    <div class="col form-buttons">
+      <div class="button-new" *ngIf="!aprobacion && !editar">
+        <button class="botones" (click)="guardarYVolver()"><i class="pi pi-caret-left"></i> Guardar y Volver</button>
+      </div>
+      <div class="button-new" *ngIf="aprobacion || editar">
+        <button class="botones" (click)="volver()" style="width: 100%;"><i class="pi pi-caret-left"></i> Volver</button>
+      </div>
+
+      <!-- Botón para publicar -->
+      <div class="button-publish" *ngIf="!editar && !aprobacion">
+        <button class="button-publicar" (click)="publicarLlamado()" [disabled]="!isFormValidForAction('publicar')">
+          <i class="pi pi-save" style="margin-right: 10px;"></i> Publicar llamado
+        </button>
+      </div>
+
+      <!-- Botón para aprobar -->
+      <div class="button-approve" *ngIf="aprobacion && !esRevisionConcurso">
+        <button class="button-publicar" (click)="aprobarLlamado()" [disabled]="!isFormValidForAction('aprobar')">
+          <img src="../../../assets/ApproveOrReject.png" style="margin-right: 10px;"/> Aprobar/rechazar
+        </button>
+      </div>
+
+      <!-- Botón para editar -->
+      <div class="button-edit" *ngIf="editar">
+        <button class="button-publicar" (click)="editarLlamado()">
+          <i class="pi pi-pencil" style="margin-right: 10px;"></i> Editar llamado
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+<p-dialog header="Aprobar/Rechazar llamado" [(visible)]="displayDialog" modal="modal" [closable]="true" [style]="{ width: '36rem', height: 'auto' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Aprobar/Rechazar llamado</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+  
+  <div class="dialog-content">
+    <p class="subtitle-dialog">Aprueba o rechaza el llamado a concurso "{{ dialogTitle }}".</p>
+
+    <h3 class="subtitle-dialog" style="margin-top: 20px;">Decisión</h3>
+
+    <div class="radio-dialog" style="margin-top: 10px;">
+      <p-radioButton name="decision" value="aprobar" label="Aprobar" [(ngModel)]="decision"></p-radioButton>
+      <p-radioButton name="decision" value="rechazar" label="Rechazar" [(ngModel)]="decision"></p-radioButton>
+    </div>
+
+    <div *ngIf="decision === 'rechazar'" class="mt-3" style="margin-top: 20px;">
+      <h4 class="subtitle-dialog">Motivo del rechazo</h4>
+      <textarea class="custom-textarea" [(ngModel)]="motivoRechazo" rows="5" cols="30" placeholder="Explica el motivo del rechazo"></textarea>
+    </div>
+
+    <div class="button-publish" style="margin-top: 20px;">
+      <button class="button-publicar" (click)="guardarDecision()">
+        <i class="pi pi-save"></i> Guardar Decisión
+      </button>
+    </div>
+  </div>
+</p-dialog>

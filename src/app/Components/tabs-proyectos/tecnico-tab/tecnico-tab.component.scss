@@ -1,0 +1,269 @@
+.columna-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.fila-datos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.fila-datos-radio-button {
+  display: flex;
+  flex-direction: row;
+}
+
+label {
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.titulo {
+  font-family: "Roboto Slab", serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  margin-bottom: 5px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.subtitulo {
+  font-family: "Roboto Slab", serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.subTexto {
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.columna-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.fila-datos {
+  display: flex;
+  flex-direction: row;
+}
+
+/* Inputs */
+.text-input {
+  padding: 8px 12px;
+  border: 1px solid #000000;
+  width: 100%;
+}
+
+.text-input:disabled {
+  border-color: #b3b3b3;
+  color: #808080;
+}
+
+.text-input.invalid-rut {
+  border-color: #fb3b3b;
+}
+
+label.disabled {
+  color: #b3b3b3;
+}
+
+.error-container {
+  height: 20px;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: #fb3b3b;
+  font-size: 12px;
+}
+
+:host ::ng-deep .dropdown-small .p-dropdown {
+  width: 203px;
+}
+
+:host ::ng-deep .dropdown-large .p-dropdown {
+  width: 284px;
+}
+
+:host ::ng-deep .dropdown-xl .p-dropdown {
+  width: 358px;
+}
+
+/** adjuntar archivos*/
+
+button-new {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-crear-demanda {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  height: 40px;
+}
+
+.button-demanda {
+  background-color: #0051a8;
+  color: #ffffff;
+  border: 2px solid #0051a8;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 0px 20px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.button-demanda:disabled {
+  background-color: #e0e0e0;
+  color: #808080;
+  border: 2px solid #e0e0e0;
+  cursor: not-allowed;
+}
+
+.botones {
+  background-color: white;
+  color: #0051a8;
+  border: 2px solid #0051a8;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 0px 26px;
+  height: 50px;
+}
+
+.pi-plus-circle {
+  color: #0051a8;
+  font-size: 20px;
+  padding: 2px 0 0 6px;
+}
+
+/** tables */
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: green !important;
+}
+
+.table-striped .p-datatable-tbody > tr:last-child,
+.my-table .p-datatable-tbody {
+  border-bottom: 2px solid black;
+}
+
+:host ::ng-deep .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #cfe1f3;
+}
+
+:host ::ng-deep th {
+  border-right: none;
+}
+
+:host ::ng-deep tbody,
+th {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+:host ::ng-deep .p-datatable-header {
+  background-color: white;
+  border: 0px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  padding: 1rem 0px;
+}
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+  justify-content: end;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #0051a8;
+  color: white;
+}
+
+.table-link {
+  font-family: "Roboto", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--Primario-Darken-1, #0051a8);
+  line-height: 28px;
+  text-align: left;
+}
+
+.boton-quitar {
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card-con-boton-quitar {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.boton-quitar-container {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  z-index: 10;
+  border: none;
+  border-left: 1px solid #cccccc;
+  border-bottom: 1px solid #cccccc;
+}
+
+.card-content {
+  padding-right: 80px;
+}
+
+.boton-quitar {
+  background: none;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

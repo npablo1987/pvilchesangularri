@@ -1,0 +1,13 @@
+<app-header></app-header>
+<div class="confirmacion-grabado-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Crear llamado a concurso'" [subtitle]="subtitle" [redireccion]="redireccion"></app-title>
+  <div class="card-detail" style="width: 60%; margin-left: 10px;">
+    <div class="icono"><img src="assets/InfoGreen.png" alt="Logo" /></div>
+    <div class="descripcion">
+      <span>El llamado a concurso “<span class="nombre-concurso">{{ nombreConcurso }}</span>” se ha creado exitosamente y ha sido enviado al encargado regional para su aprobación. </span>
+    </div>
+    <div class="close-icono"><i class="pi pi-times"></i></div>
+  </div>
+  <a href="todos-los-llamados">Ver todos los llamados</a>
+</div>

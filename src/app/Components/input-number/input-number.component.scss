@@ -1,0 +1,57 @@
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.number-input {
+  padding: 8px 12px;
+  border: 1px solid #000000;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 14px;
+  border-radius: 0;
+  box-sizing: border-box;
+
+  &.invalid-number {
+    border-color: #fb3b3b;
+  }
+
+  &.disabled-first {
+    background-color: #f2f2f2;
+    color: #cccccc;
+  }
+
+  &.disabled-second {
+    background-color: #ffffff;
+    color: #cccccc;
+  }
+
+  &:disabled {
+    border-color: #b3b3b3;
+    color: #808080;
+    cursor: not-allowed;
+  }
+}
+
+.icon {
+  position: absolute;
+  right: 10px; /* Ajusta según el espacio necesario */
+  width: 20px; /* Ajusta el tamaño del icono */
+  pointer-events: none; /* Para que el icono no interfiera con la interacción del input */
+}
+
+.porciento {
+  width: 15px;
+  height: 15px;
+}
+
+.error-container {
+  height: 20px;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: #fb3b3b;
+  font-size: 12px;
+}

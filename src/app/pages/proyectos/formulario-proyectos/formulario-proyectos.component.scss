@@ -1,0 +1,396 @@
+.formulario-proyectos-grid-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-areas:
+    'breadcrumb'
+    'title';
+  grid-template-columns: 1fr;
+  width: 100%;
+  padding: 0px 120px;
+}
+
+.text-input {
+  padding: 8px 12px;
+  border: 1px solid #000000;
+  width: 200px;
+}
+
+
+.div-form {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 12px 15px;
+}
+
+.div-disabled-inputs {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 0px 15px;
+}
+
+.label-1 {
+  font-family: "Roboto Slab", serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+  padding-left: 25px;
+}
+
+label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+:host ::ng-deep .p-dropdown  {
+  gap: 8px;
+  border: 1px solid #000000;
+  display: flex;
+  justify-content: center;
+  width: 360px;
+}
+
+.custom-textarea-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 744px;
+  height: 169px;
+  border: 1px solid black;
+  padding: 0;
+  position: relative;
+}
+
+.custom-textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  resize: none;
+  padding: 12px;
+  box-sizing: border-box;
+  text-align: left;
+  overflow: auto;
+}
+
+.custom-textarea::placeholder {
+  text-align: left;
+}
+
+.form-inputs {
+  margin-bottom: 15px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-new { 
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-crear-demanda { 
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  height: 40px;
+}
+
+.button-demanda {
+  background-color: #0051A8;
+  color:#FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.button-demanda:disabled {
+  background-color: #E0E0E0;
+  color: #808080;
+  border: 2px solid #E0E0E0;
+  cursor: not-allowed;  
+}
+
+.botones {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 7px;
+  height: 40px;
+}
+
+.fila-revision {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+}
+
+.columna-revision {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.pi {
+  font-size: 0.8rem;  
+}
+
+.error-border {
+  border-color: #FB3B3B !important;
+}
+
+.error-message {
+  color: #FB3B3B;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/** tables */
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: green !important;
+}
+
+.table-striped .p-datatable-tbody > tr:last-child,
+.my-table .p-datatable-tbody {
+  border-bottom: 2px solid black;
+}
+
+:host ::ng-deep .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #CFE1F3;
+}
+
+:host ::ng-deep th {
+  border-right: none;
+}
+
+:host ::ng-deep tbody, th {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+:host ::ng-deep .p-datatable-header {
+  background-color: white;
+  border: 0px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  padding: 1rem 0px;
+}
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+  justify-content: end;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #0051A8;
+  color: white;
+}
+
+.table-link { 
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--Primario-Darken-1, #0051A8);
+  line-height: 28px;
+  text-align: left;
+}
+
+.fila-revision {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+}
+
+.columna-revision {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  color: #6b6b6b; /* Color gris para las pestañas inactivas */
+  font-weight: normal;
+}
+
+::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
+  color: #0b63ce; /* Color azul para la pestaña activa */
+  font-weight: bold; /* Texto en negrita para la pestaña activa */
+}
+
+::ng-deep .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link::after {
+  content: "";
+  display: block;
+  width: 50%; /* Grosor de la barra activa */
+  margin: 0 auto;
+  border-bottom: 3px solid #0b63ce; /* Barra azul debajo de la pestaña activa */
+}
+
+::ng-deep .p-tabview .p-tabview-nav {
+  justify-content: start; /* Distribuye las pestañas equitativamente */
+  border-bottom: 3px solid #dcdcdc; /* Línea inferior ligera */
+}
+
+::ng-deep .p-tabview .p-tabview-nav li {
+  margin-left: 70px; /* Aplica un margen izquierdo de 50px a todas las pestañas */
+}
+
+::ng-deep .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  color: #6b6b6b; /* Color gris para las pestañas inactivas */
+  text-decoration: none; /* Elimina cualquier subrayado */
+}
+
+.button-new { 
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-crear-demanda { 
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  height: 40px;
+}
+
+.button-demanda {
+  background-color: #0051A8;
+  color:#FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.button-demanda:disabled {
+  background-color: #E0E0E0;
+  color: #808080;
+  border: 2px solid #E0E0E0;
+  cursor: not-allowed;  
+}
+
+.botones {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 7px;
+  height: 40px;
+}
+
+/** factibilidad */
+
+.prefactible {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px;
+  border: 2px solid #4CAF50;
+  border-radius: 5px;
+  max-width: 1128px;
+  margin: auto;
+}
+
+.factibilidad-container {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-width: 1240px;
+  margin: auto;
+}
+
+h2 {
+  color: #333;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.titulo-factibilidad {
+  font-family: "Roboto Slab", serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.subTexto-factibilidad {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}

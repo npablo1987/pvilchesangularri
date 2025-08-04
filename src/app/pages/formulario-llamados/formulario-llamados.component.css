@@ -1,0 +1,10 @@
+.formulario-llamados-grid-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-areas:
+    'breadcrumb'
+    'title';
+  grid-template-columns: 1fr;
+  width: 100%;
+  padding: 0px 120px;
+}

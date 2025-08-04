@@ -1,0 +1,22 @@
+<div class="resolucion">
+  <span class="title">Resolución</span>
+  <div class="column" *ngIf="!exito; else vinculado">
+    <label for="codigo-resulucion">Identificador de resolución (ceropapel)</label>
+    <div class="row">
+      <div class="resolucion-input">
+        <input id="codigo-resulucion" class="text-input" type="text" pInputText [(ngModel)]="codigoResolucion" />
+      </div>
+      <div class="resolucion-input">
+        <button class="boton-vinculo" (click)="vincularCeroPapel()" ><i class="pi pi-link"></i> Vincular</button>
+      </div>
+    </div>
+  </div>
+  <ng-template #vinculado>
+    <div class="row">
+      <a class="link-descarga" (click)="descargaPDF()"><i class="pi pi-file-pdf"></i>{{ nombreDocumento }}</a><i class="pi pi-trash" (click)="borrarPDF()" style="color: red; margin-top: 5px;"></i>
+    </div>
+  </ng-template>
+  <ng-template *ngIf="errorVinculacion === 0">
+    <span class="error-message">La resolución ingresada no existe en la interfaz Cero Papel</span>
+  </ng-template>
+</div>

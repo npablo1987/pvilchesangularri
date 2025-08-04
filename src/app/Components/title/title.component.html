@@ -1,0 +1,73 @@
+<div class="header-grid-area">
+  <div class="row">
+    <div class="title">
+      <span class="calls-header">{{ title }}</span>
+      <span class="btn-edit" *ngIf="boton === 'formularioProyectos'" (click)="editarProyecto()">
+        <i class="pi pi-pen-to-square"></i>
+      </span>
+    </div>
+    <div class="divider" *ngIf="redireccion">
+      <span>/</span>
+    </div>
+    <div class="link" *ngIf="redireccion">
+      <a href="/todos-los-llamados">{{ redireccion }}
+        <i class="pi pi-caret-right"></i>
+      </a>
+    </div>
+  </div>
+  <div class="row" style="padding-left: 0px; margin-top: 10px;">
+    <div class="texto-subtitulo" *ngIf="boton === 'Priorizacion' || boton === 'comite' || boton === 'priorizacionFinal'">
+      <a href="#" style="padding: 0px;">
+        <i class="pi pi-eye"></i> Detalles
+      </a>
+      <span class="subtitulo" style="padding: 7px;"> | Proyectos: <strong>10</strong> | Estado: <strong> Cerrado </strong></span>
+    </div>
+    <div class="texto-subtitulo" *ngIf="boton != 'Priorizacion'">
+      <span class="subtitulo">{{ subtitle }}</span>
+    </div>
+    <div class="row" *ngIf="boton === 'formularioProyectos'" style="padding-left: 11%;">
+        <div class="columna-revision">
+          <label>N° Demanda</label>
+          <span>{{ demandaId }}
+            <app-chip [text]="estadoDemanda" [color]="chipColor"></app-chip>
+          </span>
+        </div>
+        <div class="columna-revision" style="padding-top: 10px;">
+          <label>Estado</label>
+          <span>{{ estadoProyecto }}</span>
+        </div>
+    </div>
+    <div class="col" *ngIf="boton === 'Priorizacion'" style="display: flex; justify-content: end;">
+      <button class="boton-tabla" (click)="priorizacionPrevia()">
+        <i class="pi pi-bars"></i> 
+        Priorización previa
+      </button>
+    </div>
+   <div class="col" *ngIf="boton === 'comite'" style="display: flex; justify-content: end;">
+      <button class="button-publicar" (click)="enviarComite()">
+        <i class="pi pi-arrow-right" style="margin-right: 10px;"></i> 
+        Enviar a comité
+      </button>
+    </div>
+
+    <div class="col" *ngIf="boton === 'priorizacionFinal'" style="display: flex; justify-content: end;">
+    <button class="button-publicar" 
+            [class.disabled-button]="priorizacionFinal"
+            [disabled]="priorizacionFinal"
+            (click)="priorizacionFin()">
+      <i class="pi pi-bars" style="margin-right: 10px;"></i> 
+      Priorización final
+    </button>
+  </div>
+    <div class="col" *ngIf="boton === 'Llamados'" style="display: flex; justify-content: end;">
+      <button class="boton-tabla" (click)="crearLlamado()"><i class="pi pi-plus-circle"></i> Nuevo llamado</button>
+    </div>
+    <div class="col" *ngIf="boton === 'Demandas'" style="display: flex; justify-content: end;">
+      <button class="boton-tabla" (click)="crearDemanda()"><i class="pi pi-plus-circle"></i> Nueva Demanda</button>
+    </div>
+    <div class="col" *ngIf="boton === 'Proyectos'" style="display: flex; justify-content: end;">
+      <button class="boton-tabla" (click)="crearProyecto()"><i class="pi pi-plus-circle"></i> Nuevo Proyecto</button>
+    </div>
+  </div>
+  
+</div>

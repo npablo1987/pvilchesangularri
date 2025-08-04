@@ -1,0 +1,171 @@
+.columna-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.fila-datos {
+  display: flex;
+  flex-direction: row;
+}
+
+label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.titulo {
+  font-family: 'Roboto Slab', serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  margin-bottom: 5px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.subtitulo {
+  font-family: 'Roboto Slab', serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.subTexto {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+button-new { 
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-crear-demanda { 
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  height: 40px;
+}
+
+.button-demanda {
+  background-color: #0051A8;
+  color:#FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 0px 20px;
+  height: 50px;
+  cursor: pointer;
+}
+
+.button-demanda:disabled {
+  background-color: #E0E0E0;
+  color: #808080;
+  border: 2px solid #E0E0E0;
+  cursor: not-allowed;  
+}
+
+.botones {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 0px 26px;
+  height: 50px;
+}
+
+.pi-plus-circle {
+  color: #0051A8;
+  font-size: 20px;
+  padding: 2px 0 0 6px;
+}
+
+/** tables */
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: green !important;
+}
+
+.table-striped .p-datatable-tbody > tr:last-child,
+.my-table .p-datatable-tbody {
+  border-bottom: 2px solid black;
+}
+
+:host ::ng-deep .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #CFE1F3;
+}
+
+:host ::ng-deep th {
+  border-right: none;
+}
+
+:host ::ng-deep tbody, th {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+:host ::ng-deep .p-datatable-header {
+  background-color: white;
+  border: 0px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  padding: 1rem 0px;
+}
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+  justify-content: end;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #0051A8;
+  color: white;
+}
+
+.table-link { 
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--Primario-Darken-1, #0051A8);
+  line-height: 28px;
+  text-align: left;
+}

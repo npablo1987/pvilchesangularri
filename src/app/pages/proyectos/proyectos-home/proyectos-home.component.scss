@@ -1,0 +1,181 @@
+.proyectos-home-grid-layout {
+  display: grid;
+  gap: 16px;
+  grid-template-areas:
+    'breadcrumb'
+    'title'
+    'table';
+  grid-template-columns: 1fr;
+  width: 100%;
+  padding: 0px 120px;
+}
+
+.pi {
+  font-size: 0.8rem;  
+}
+
+/** tables */
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: green !important;
+}
+
+.table-striped .p-datatable-tbody > tr:last-child,
+.my-table .p-datatable-tbody {
+  border-bottom: 2px solid black;
+}
+
+:host ::ng-deep .table-striped tbody tr:nth-of-type(odd) {
+  background-color: #CFE1F3;
+}
+
+:host ::ng-deep th {
+  border-right: none;
+}
+
+:host ::ng-deep tbody, th {
+  border-bottom: 2px solid black;
+  border-top: 2px solid black;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-tbody > tr > td {
+  padding: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-thead > tr > th {
+  padding: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+:host ::ng-deep .p-datatable-header {
+  background-color: white;
+  border: 0px;
+}
+
+:host ::ng-deep .p-datatable .p-datatable-header {
+  padding: 1rem 0px;
+}
+
+:host ::ng-deep .p-datatable .p-paginator-bottom {
+  justify-content: end;
+}
+
+:host ::ng-deep .p-paginator .p-paginator-pages .p-paginator-page.p-highlight {
+  background-color: #0051A8;
+  color: white;
+}
+
+.table-link { 
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--Primario-Darken-1, #0051A8);
+  line-height: 28px;
+  text-align: left;
+}
+
+.additional-links {
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 10px;
+  position: absolute;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  width: 138px;
+
+}
+
+.additional-links a {
+  margin-bottom: 5px;
+  text-decoration: none;
+  color: #0051A8;
+  display: flex;
+  align-items: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.additional-links a i {
+  margin-right: 5px;
+}
+
+.additional-links a:hover {
+  text-decoration: none;
+}
+
+
+/** input de la tabla */
+
+label {
+  padding-top: 7px;
+  margin-right: 10px;
+}
+
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-container .pi-search {
+  position: absolute;
+  left: 10px;
+  color: #0F69C4;
+}
+
+.input-container input {
+  padding-left: 30px;
+}
+
+.boton-busqueda {
+  background-color: white;
+  display: flex;
+  justify-content: flex-end;
+}
+
+
+.additional-links {
+  position: fixed;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 155px;
+}
+
+.additional-links a {
+  display: block;
+  padding: 4px 8px;
+  text-decoration: none;
+  color: #333;
+  cursor: pointer;
+}
+
+.additional-links a:hover {
+  background-color: #f5f5f5;
+}
+
+a {
+  cursor: pointer;
+}
+
+

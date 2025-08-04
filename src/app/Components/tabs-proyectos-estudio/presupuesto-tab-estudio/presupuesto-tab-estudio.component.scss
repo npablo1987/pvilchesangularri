@@ -1,0 +1,153 @@
+.div-presupuesto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  height: 74px;
+}
+
+p-inputNumber {
+  flex: 0 0 200px;
+}
+
+.row-white {
+  background-color: #ffffff;
+}
+
+.row-gray {
+  background-color: #F2F2F2;
+}
+
+.row-black {
+  background-color: #373737;
+  color: #ffffff;
+}
+
+.row-black label {
+  color: #ffffff;
+}
+
+.row-black p-inputNumber {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.total p-inputNumber {
+  font-weight: bold;
+}
+
+.bold-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #373737;
+  margin: 0px;
+}
+
+.budget-text {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.titulo {
+  font-family: 'Roboto Slab', serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 36px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.columna-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.fila-datos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.grid-documentacion-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas con tamaños iguales */
+  gap: 16px; /* Espaciado entre elementos (ajusta según tu diseño) */
+}
+
+/** Revisar */
+label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+a {
+  color: #0051A8;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.subtitulo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+
+.subTexto {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+.columna-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.fila-datos {
+  display: flex;
+  flex-direction: row;
+}
+
+.botones {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 0px 26px;
+  height: 50px;
+}
+
+.pi-plus-circle {
+  color: #0051A8;
+  font-size: 20px;
+  padding: 2px 0 0 6px;
+}

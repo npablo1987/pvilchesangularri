@@ -1,0 +1,100 @@
+<app-header></app-header>
+<div class="formulario-proyectos-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <span>Editar proyecto</span>
+  <app-title [title]="nombreProyecto" [subtitle]="subtitle" [boton]="'formularioProyectos'"></app-title>
+  <div class="fila-datos" *ngIf="estadoProyecto">
+    <div *ngIf="!esRutaAsignado" class="fila-datos" [class.hidden]="esRutaAsignado">
+      <div *ngIf="esPrefactibilidadFallida; else prefactible" class="factibilidad-container">
+        <!-- Componente actual (cuando es FALLIDA) -->
+        <div class="fila-datos">
+          <label class="titulo-factibilidad">Pre-factibilidad</label>
+        </div>
+        <div class="fila-datos">
+          <span class="subTexto-factibilidad">Aún no se define la pre-factibilidad de este proyecto. La persona asignada para revisar la pre-factibilidad es ({{ responsable }})</span>
+        </div>
+        <div class="fila-datos" style="padding-top: 15px;">
+          <button class="button-demanda" (click)="definirFactibilidad()">
+            Definir Pre-factibilidad <i class="pi pi-angle-right" style="margin-left: 10px;"></i>
+          </button>
+        </div>
+      </div>
+    
+      <ng-template #prefactible>
+        <div class="prefactible">
+            <div class="columna-datos">
+              <i class="pi pi-info-circle" style="color: #4CAF50; font-size: 28px; padding: 30px 20px 0 0;"></i>
+            </div>
+            <div class="columna-datos">
+              <div class="fila-datos">
+            <label class="titulo-factibilidad">Factibilidad</label>
+            </div>
+            <div class="fila-datos">
+              <span class="subTexto-factibilidad">El proyecto ha sido declarado <strong>FACTIBLE</strong> por {{ responsable }}</span>
+            </div>
+            <div class="fila-datos" style="padding-top: 15px;">
+              <button class="botones" (click)="descargarPrefactibilidad()">
+                <i class="pi pi-download"></i> Documento pre-factibilidad
+              </button> 
+            </div>
+            </div>
+          </div>      
+      </ng-template>
+    </div>
+
+  <app-factibilidad-proyecto-dialog [displayDialog]="factibilidadDialog" [idProyectoBorrador]="idProyectoBorrador"></app-factibilidad-proyecto-dialog>
+</div>
+
+   <p-tabView [(activeIndex)]="activeTabIndex">
+    <p-tabPanel header="General">
+        <app-general-tab [generalDataRevisar]="datosGenerales"></app-general-tab>
+    </p-tabPanel>
+    <p-tabPanel header="Legal">
+        <app-legal-tab></app-legal-tab>
+    </p-tabPanel>
+    <p-tabPanel header="Técnico">
+        <app-tecnico-tab></app-tecnico-tab>
+    </p-tabPanel>
+    <p-tabPanel header="Presupuesto">
+        <app-presupuesto-tab  (presupuestoEmitido)="manejarPresupuesto($event)"></app-presupuesto-tab>
+    </p-tabPanel>
+    <p-tabPanel header="Evaluacion" *ngIf="esRutaAsignado">
+        <app-evaluacion-tab 
+        ></app-evaluacion-tab>
+    </p-tabPanel>
+    <p-tabPanel header="Supervisión">
+      <app-supervision-tab></app-supervision-tab>
+    </p-tabPanel>
+</p-tabView>
+<p-divider />
+ <div class="fila-datos" style="display: flex; justify-content: space-between;">
+     <div class="button-new" *ngIf="!esRutaAsignado; else evaluacion">
+       <button class="botones" (click)="guardarYVolver()">
+         <i class="pi pi-caret-left"></i> Guardar y Volver
+       </button> 
+     </div>
+     <ng-template #evaluacion>
+       <div class="button-new">
+       <button class="botones" (click)="guardarYVolver()">
+         <i class="pi pi-caret-left"></i> Volver
+       </button> 
+     </div>
+     </ng-template>
+     <div class="button-crear-demanda" *ngIf="!esRutaAsignado">
+       <button class="button-demanda" (click)="guardarProyecto()">
+         <i class="pi pi-save" style="margin-right: 10px;"></i> Guardar Proyecto
+       </button>
+     </div>
+   </div>    
+</div>
+
+<app-guardar-proyecto-dialog [display]="mostrarDialog" (dialogClosed)="onDialogClosed()"></app-guardar-proyecto-dialog>
+
+<app-confirmacion-dialog
+  [display]="mostrarConfirmacion"
+  [isSuccess]="esExito"
+  [successMessage]="mensajeExito"
+  [errorMessage]="mensajeError"
+  (onConfirm)="onConfirmar()"
+  (onClose)="onCerrar()"
+></app-confirmacion-dialog>

@@ -1,0 +1,310 @@
+.criterios { 
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 12px 15px;
+  margin-top: 30px;
+  grid-area: 'criterios';
+}
+
+.title {
+  font-family: 'Roboto Slab', serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.button-new { 
+  padding: 10px;
+  display: flex;
+}
+
+.button-new .btn-primary {
+  background-color: var(--Blanco-Base, #FFFFFF);
+  border: 2px solid #1565C0; 
+  color: #1565C0; 
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.button-new .btn-primary .pi {
+  margin-right: 8px;
+  width: 24px;
+}
+
+.add-criterio {
+  font-family: 'Roboto Slab', serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  color: #1565C0;
+}
+
+.card-criterio-titles {
+  font-family: 'Roboto', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 28px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-panel .p-panel-header {
+  background-color: #FFFFFF;
+}
+
+:host ::ng-deep .p-panel .p-panel-content {
+  background-color: #f7f5f5;
+}
+
+.texto-header {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.div-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+:host ::ng-deep .p-panel .p-panel-header .p-panel-header-icon {
+  display: none;
+}
+
+.custom-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.custom-toggle-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.custom-toggle-button .pi {
+  font-size: 1.5em;
+}
+
+.table-link-edit { 
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0051A8;
+  line-height: 24px;
+  text-align: left;
+}
+
+.table-link-delete { 
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #FB3B3B;
+  line-height: 24px;
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+:host ::ng-deep .tabla-variables {
+  .p-datatable-header, .p-datatable-tbody, .p-datatable-tfoot {
+    background-color: #d8d8d8;
+  }
+
+  .p-datatable-tbody > tr > td, 
+  .p-datatable-header > tr > th, 
+  .p-datatable-tfoot > tr > td {
+    background-color: #f7f5f5 !important;
+  }
+
+  .p-datatable-thead > tr > th {
+    background-color: #f7f5f5 !important;
+    border-bottom: 1px solid #cccccc !important;
+  }
+
+  .p-datatable-tbody > tr, 
+  .p-datatable-header > tr, 
+  .p-datatable-tfoot > tr {
+    border-bottom: 1px solid #cccccc !important;
+  }
+
+  .p-datatable-tbody > tr > td, 
+  .p-datatable-header > tr > th, 
+  .p-datatable-tfoot > tr > td {
+    border-bottom: 1px solid #cccccc !important;
+  }
+}
+
+.texto-theader {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  color: #cccccc
+}
+
+.texto-tbody {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.div-boton {
+  margin: 20px;
+}
+
+.boton-variable-agregar {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  color: #0051A8;
+  cursor: pointer;
+}
+
+p-dialog .ui-dialog-titlebar {
+  position: relative;
+}
+
+p-dialog .ui-dialog-titlebar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-bottom: 1px solid #000; 
+}
+
+.espacio {
+  padding: 20px;
+}
+
+:host ::ng-deep .p-panel .p-panel-header .p-panel-header-icon {
+  display: none;
+}
+
+.custom-toggle-button .pi {
+  font-size: 1.5em;
+  color: #000;
+}
+
+.dialog-content {
+  padding: 0px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.mb-3, .mb-5 {
+  margin-bottom: 1rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.cancel-button {
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+  color: white !important;
+}
+
+.save-button {
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+  color: white !important;
+}
+
+input, .p-inputtext {
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+}
+
+:host ::ng-deep .p-inputnumber-input {
+  display: flex;
+  flex-direction: column;
+  width: 499px;
+}
+
+.button-publicar {
+  background-color: #0051A8;
+  color:#FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+}
+
+.button-publish .btn-save .pi {
+  margin-right: 8px;
+  width: 24px;
+}
+
+.button-publish { 
+  display: flex;
+  padding: 10px;
+  justify-content: end;
+  height: 40px;
+}
+
+.subtitle-dialog {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.dialog-title {
+  font-family: 'Roboto', sans-serif;
+  font-size: 19px;
+  font-weight: 500;
+  line-height: 28.5px;
+  text-align: left;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-header {
+  padding: 25px 25px 0px 15px;
+}
+
+:host ::ng-deep .p-dialog .p-dialog-content {
+  padding: 5px 1px 1px 1px ;
+}
+
+:host ::ng-deep .p-divider {
+  width: 510px;
+}

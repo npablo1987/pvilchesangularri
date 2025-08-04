@@ -1,0 +1,138 @@
+<app-header></app-header>
+<div class="proyectos-postular-grid-layout">
+  <app-breadcrumb [breadcrumb]="breadcrumb"></app-breadcrumb>
+  <app-title [title]="'Postular proyecto de riego'"></app-title>
+  <span class="subtitulo" style="padding: 25px 0 5px 10px;">Resumen del proyecto</span>
+ <div class="columna-datos" style="padding-left: 10px;">
+  <div class="custom-message columna-datos">
+    <div class="fila-datos">
+      <div class="columna-datos label-box">
+        <label>Solicitante</label>
+        <span class="subTexto">{{ solicitante }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>RUN</label>
+        <span class="subTexto">{{ run }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>Instrumento</label>
+        <span class="subTexto">{{ insturmento }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>Comuna</label>
+        <span class="subTexto">{{ comuna }}</span>
+      </div>
+    </div>
+    <div class="fila-datos">
+      <div class="columna-datos label-box">
+        <label>Tipología</label>
+        <span class="subTexto">{{ Tipologia }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>Costo total proyecto</label>
+        <span class="subTexto">{{ costoTotal }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>Incentivo</label>
+        <span class="subTexto">{{ incentivo }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>Aporte personal</label>
+        <span class="subTexto">{{ aportePersonal }}</span>
+      </div>
+    </div>
+    <div class="fila-datos">
+      <div class="columna-datos label-box">
+        <label>Nombre proyecto</label>
+        <span class="subTexto">{{ nombreProyecto }}</span>
+      </div>
+      <div class="columna-datos label-box">
+        <label>N° Demanda</label>
+        <span>{{ numeroDemanda }}
+          <app-chip [text]="estadoProyecto" [color]="chipColor"></app-chip>
+        </span>
+      </div>
+      <div class="columna-datos label-box"></div>
+      <div class="columna-datos label-box"></div>
+    </div>
+  </div>
+</div>
+<div class="columna-datos" style="padding-left: 15px; padding-top: 20px;">
+  <label style="padding-bottom: 10px;">Selecciona un llamado a concurso:</label>
+  <div class="fila-datos">
+    <p-dropdown class="dropdown-xl" [options]="concursosPublicados" [(ngModel)]="selectedConcurso" optionLabel="nombre"
+      placeholder="Seleccione"/>
+    <button class="botones" (click)="validarDatosClave()" style="margin-left: 20px;">
+         <i class="pi pi-check"></i> Validar datos clave
+    </button>
+  </div>
+  <label style="padding-top: 10px">Cierre postulación: {{ fechaCierrePostulacion | date:'dd-MM-yyyy HH:mm' }}</label>
+</div>
+
+<div class="columna-datos" *ngIf="validarDatos" style="padding-left: 15px;">
+  <div class="fila-datos" style="padding: 20px 0 40px 0; ">
+    <span class="subtitulo">Validación de datos clave</span>
+  </div>
+  <div class="fila-datos" style="padding-bottom: 20px;">
+    <div style="width: 50%;">
+      <i class="pi pi-check" style="color: #4CAF50; font-size: 20px;" *ngIf="validacionUsuarioAdmisible"></i>
+      <i class="pi pi-times" style="color: #FB3B3B; font-size: 20px;" *ngIf="!validacionUsuarioAdmisible"></i>
+      <span class="texto-validacion" style="margin-left: 15px;">Usuario con admisibilidad</span>
+    </div>
+     <div style="width: 50%;">
+      <i class="pi pi-check" style="color: #4CAF50; font-size: 20px;" *ngIf="validacionCartaSeleccionContratista"></i>
+      <i class="pi pi-times" style="color: #FB3B3B; font-size: 20px;" *ngIf="!validacionCartaSeleccionContratista"></i>
+      <span class="texto-validacion" style="margin-left: 15px;">Cuenta con carta de selección de contratista</span>
+    </div>
+  </div>
+  <div class="fila-datos" style="padding-bottom: 20px;">
+    <div style="width: 50%;">
+      <i class="pi pi-check" style="color: #4CAF50; font-size: 20px;" *ngIf="validacionProyectoPreFactible"></i>
+      <i class="pi pi-times" style="color: #FB3B3B; font-size: 20px;" *ngIf="!validacionProyectoPreFactible"></i>
+      <span class="texto-validacion" style="margin-left: 15px;">Proyecto con pre factibilidad</span>
+    </div>
+     <div style="width: 50%;">
+      <i class="pi pi-check" style="color: #4CAF50; font-size: 20px;" *ngIf="validacionCartaConocimientoAportePersonal"></i>
+      <i class="pi pi-times" style="color: #FB3B3B; font-size: 20px;" *ngIf="!validacionCartaConocimientoAportePersonal"></i>
+      <span class="texto-validacion" style="margin-left: 15px;">Cuenta con carta de conocimiento de aporte personal</span>
+    </div>
+  </div>
+  <div class="fila-datos" style="padding-bottom: 40px;">
+     <div style="width: 50%;">
+      <i class="pi pi-check" style="color: #4CAF50; font-size: 20px;" *ngIf="validacionCartaSeleccionConsultor"></i>
+      <i class="pi pi-times" style="color: #FB3B3B; font-size: 20px;" *ngIf="!validacionCartaSeleccionConsultor"></i>
+      <span class="texto-validacion" style="margin-left: 15px;">Cuenta con carta de selección de consultor</span>
+    </div>
+     <div style="width: 50%;">
+      <i class="pi pi-check" style="color: #4CAF50; font-size: 20px;" *ngIf="validacionCamposRequeridos"></i>
+      <i class="pi pi-times" style="color: #FB3B3B; font-size: 20px;" *ngIf="!validacionCamposRequeridos"></i>
+      <span class="texto-validacion" style="margin-left: 15px;">Todos los campos requeridos están completados</span>
+    </div>
+  </div>  
+  <div class="fila-datos" style="padding-bottom: 20px;">
+    <label style="color: #4CAF50;" *ngIf="proyectoValido">El proyecto está en condiciones de ser postulado al concurso.</label>
+    <label style="color: #FB3B3B;" *ngIf="!proyectoValido">El proyecto no está en condiciones de ser postulado al concurso.</label>
+  </div>
+  <div class="fila-datos" *ngIf="proyectoValido">
+    <button class="button-demanda" (click)="confirmPostulacion = true" *ngIf="!confirmPostulacion">
+         <i class="pi pi-send" style="margin-right: 5px;"></i> Postular proyecto
+    </button>
+    <button class="button-demanda" (click)="postularProyecto()" *ngIf="confirmPostulacion">
+         <i class="pi pi-check" style="margin-right: 5px;"></i> Confirmar postulación
+    </button>
+    <button class="button-demanda" (click)="confirmPostulacion = false" *ngIf="confirmPostulacion" style="margin-left: 10px;">
+         <i class="pi pi-times" style="margin-right: 5px;"></i> Cancelar
+    </button>
+  </div>
+</div>
+
+</div>
+
+<app-confirmacion-dialog
+  [display]="mostrarDialog"
+  [isSuccess]="esExito"
+  [successMessage]="mensajeExito"
+  [errorMessage]="mensajeError"
+  (onConfirm)="onConfirmar()"
+  (onClose)="onCerrar()"
+></app-confirmacion-dialog>

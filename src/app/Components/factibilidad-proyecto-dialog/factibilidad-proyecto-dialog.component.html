@@ -1,0 +1,66 @@
+<p-dialog header="Proyecto" [(visible)]="displayDialog" modal="modal" [closable]="true" [style]="{ width: '33rem', height: 'auto' }">
+  <ng-template pTemplate="header">
+    <span class="dialog-title">Pre-factibilidad del Proyecto</span>
+  </ng-template>
+
+  <p-divider></p-divider>
+
+  <div class="fila-datos">
+    <div class="columna-datos">
+
+      <label>El proyecto es</label>
+      <br>
+      <div class="fila-datos">
+        <div class="columna-datos">
+          <div class="fila-datos">
+            <p-radioButton name="anio" [value]="true" [(ngModel)]="factibilidad"></p-radioButton>
+            <span class="font-level-7 subtitle-dialog" style="padding-left: 10px;">
+              Pre-factible
+            </span>
+          </div>
+          <br>
+          <div class="fila-datos">
+            <p-radioButton name="anio" [value]="false" [(ngModel)]="factibilidad"></p-radioButton>
+            <span class="font-level-7 subtitle-dialog" style="padding-left: 10px">
+              No Pre-factible
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="factibilidad">
+    <div class="fila-datos">
+      <div class="columna-datos" style="padding-top: 30px;">
+        <span class="subtitulo">Documento de Prefactibilidad</span>
+        <span class="subTexto" style="padding: 5px 0 10px 0;">Subir archivo máximo 5MB</span>
+
+        <div style="width: 100%;">
+          <input type="file" id="archivoPrefactible" accept=".pdf" (change)="subirArchivoPrefactibilidad($event)" hidden />
+
+          <div *ngIf="archivoCargado && archivoFactibilidad">
+            <span class="subtitulo">{{ archivoFactibilidad.nombre }}</span>
+            <i class="pi pi-trash" (click)="eliminarArchivoPrefactibilidad()" style="cursor: pointer; color: #CD1E2C; margin-left: 10px;"></i>
+          </div>
+          <div *ngIf="!archivoCargado">
+            <button class="botones" (click)="triggerFileInput('archivoPrefactible')">
+              <div class="fila-datos">
+                <span>Cargar archivo</span>
+                <i class="pi pi-plus-circle"></i>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dialog-content">
+    <div class="button-publish" style="margin-top: 20px;">
+      <button class="button-publicar" (click)="guardarFactibilidad()">
+        <i class="pi pi-save" style="padding-right: 10px;"></i> Guardar proyecto
+      </button>
+    </div>
+  </div>
+</p-dialog>

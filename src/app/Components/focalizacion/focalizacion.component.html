@@ -1,0 +1,32 @@
+<div class="focalizacion">
+  <span class="title">Focalización del concurso</span>
+  <div class="row">
+    <div class="col">
+      <label for="fondo-concurso">Region:</label>
+      <p-dropdown [options]="regiones" [(ngModel)]="selectedRegion" (ngModelChange)="emitFocalizacion()"
+      optionLabel="nombre" placeholder="Seleccione Region" (onChange)="onRegionChange($event.value)" [disabled]="isDisabled" />
+    </div>
+    <div class="col">
+      <label for="area">Area:</label>
+      <p-dropdown [options]="areaConcurso" [(ngModel)]="selectedArea" (ngModelChange)="emitFocalizacion()"
+      optionLabel="nombre" placeholder="Seleccione area" (onChange)="onAreaChange($event.value)" [disabled]="isDisabled" />
+    </div>
+  </div>
+  <div class="col focalizacion-container" style="margin-top: 30px">
+    <div class="col focalizacion-container">
+      <label>Comunas</label>
+      <div class="row focalizacion-items" style="margin-top: 3px;" *ngFor="let comuna of comunasConcurso">
+        <p-checkbox
+          name="comunas"
+          [value]="comuna"
+          [(ngModel)]="comuna.selected"
+          (onChange)="onCheckboxChange($event, comuna)"
+          binary="true"
+          [disabled]="isDisabled">
+        </p-checkbox>
+        <span style="margin-left: 10px">{{ comuna.nombre | titlecase }}</span>
+      </div>
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,135 @@
+.calls-header { 
+  font-family: 'Roboto Slab', serif;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 54px;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.header-grid-area {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 15px;
+  display: flex;
+  grid-area: 'header';
+  width: 100%;
+}
+
+.pi-caret-right {
+  color: #0051A8;
+  width: 24px;
+}
+
+a {
+  float: left;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--Primario-Darken-1, #0051A8);
+  text-decoration: none;
+  padding: 7px;
+}
+
+.divider { 
+  padding: 22px 15px;
+}
+
+.link {
+  padding: 13px 0px;
+}
+
+.boton-posicion {
+  display: flex;
+  justify-content: end
+}
+
+.boton-tabla {
+  background-color: white;
+  color:#0051A8;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  padding: 10px 15px;
+}
+
+.pi-plus-circle {
+  width: 24px;
+  height: 24px;
+}
+
+.subtitulo {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: left;
+}
+
+.texto-subtitulo {
+  margin-left: 13px;
+  width: 63%;  
+}
+
+.columna-revision {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+label {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.button-publicar {
+  background-color: #0051A8;
+  color: #FFFFFF;
+  border: 2px solid #0051A8;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  text-align: center;
+  padding: 8px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.disabled-button {
+  background-color: #CCCCCC !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.disabled-button:hover {
+  background-color: #CCCCCC !important;
+}
+
+/**
+ * Edit button
+ */
+ .btn-edit {
+  color: #0056b3;
+  padding-left: 1rem;
+  position: relative;
+  bottom: 0.2rem;
+}
+
+.btn-edit:hover {
+  cursor: pointer;
+}
+
+.btn-edit i {
+  font-size: x-large;
+}
