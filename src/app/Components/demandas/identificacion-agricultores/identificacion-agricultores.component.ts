@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { DividerModule } from 'primeng/divider';
 import { formatRut } from '../../../utils/formatters';
+import { esRutValido } from '../../../utils/validaciones';
 
 @Component({
   selector: 'app-identificacion-agricultores',
@@ -204,50 +205,14 @@ export class IdentificacionAgricultoresComponent implements OnInit{
     }
   }
 
-  private validarRut(rutRaw: string): boolean {
-    if (!rutRaw) { return false; }
-
-    const rut = rutRaw.replace(/\./g, '').replace(/-/g, '').toUpperCase();
-    if (!/^\d{7,8}[0-9K]$/.test(rut)) { return false; }
-
-    const cuerpo = rut.slice(0, -1);
-    const dv     = rut.slice(-1);
-
-    let suma = 0, mult = 2;
-    for (let i = cuerpo.length - 1; i >= 0; i--) {
-      suma += +cuerpo[i] * mult;
-      mult   = mult === 7 ? 2 : mult + 1;
-    }
-
-    const resto  = 11 - (suma % 11);
-    const dvReal = resto === 11 ? '0' : resto === 10 ? 'K' : String(resto);
-    return dvReal === dv;
-  }
-
-  private formatearRut(rutRaw: string): string {
-    const clean = rutRaw.replace(/\./g, '').replace(/-/g, '').toUpperCase();
-    if (clean.length < 2) { return clean; }
-
-    const cuerpo = clean.slice(0, -1);
-    const dv     = clean.slice(-1);
-    let out = '', i = 0;
-
-    for (let j = cuerpo.length - 1; j >= 0; j--) {
-      out = cuerpo[j] + out;
-      i++;
-      if (i === 3 && j !== 0) { out = '.' + out; i = 0; }
-    }
-    return `${out}-${dv}`;
-  }
-
   onIdentificadorChange(val: string) {
-    this.identificador          = this.formatearRut(val);
-    this.rutIdentificadorValido = this.validarRut(this.identificador);
+    this.identificador = formatRut(val);
+    this.rutIdentificadorValido = esRutValido(val);
   }
 
   onRutRepresentanteChange(val: string) {
-    this.rutRepresentanteLegal      = this.formatearRut(val);
-    this.rutRepresentanteLegalValido = this.validarRut(this.rutRepresentanteLegal);
+    this.rutRepresentanteLegal = formatRut(val);
+    this.rutRepresentanteLegalValido = esRutValido(val);
   }
 
 }
