@@ -150,19 +150,29 @@ export class IdentificacionAgricultoresComponent implements OnInit{
   identificarAgricultor() {
     const mostrarCampos = true;
     if (this.tipoAgricultor.idTipoUsuario === 1 && !this.esEditar) {
-      this.demandaService.getPersonaNatural(this.identificador).subscribe({
-        next: (resp) => {
-          this.personaNatural = resp
-          this.nombreAgricultor = resp.nombreCompleto
-          this.rutAgricultor = formatRut(resp.rut)
-          this.edadAgricultor = resp.edad.toString()
-          this.sexoAgricultor = resp.sexo === 'M' ? 'Masculino' : 'Femenino'
-          this.acreditacionAgricultor = resp.estadoAcreditacion ? 'Acreditado' : 'No acreditado'
-          this.informacionAgricultorOk = true
-          this.identificadorOk.emit({ id: this.identificador, nombreUsuario: this.nombreAgricultor, mostrarCampos });
-          this.identificador = formatRut(resp.rut);
+      this.demandaService.estaFallecido(this.identificador).subscribe({
+        next: (fallecido) => {
+          if (fallecido) {
+            alert('Persona fallecida!');
+            return;
+          }
+          this.demandaService.getPersonaNatural(this.identificador).subscribe({
+            next: (resp) => {
+              this.personaNatural = resp
+              this.nombreAgricultor = resp.nombreCompleto
+              this.rutAgricultor = formatRut(resp.rut)
+              this.edadAgricultor = resp.edad.toString()
+              this.sexoAgricultor = resp.sexo === 'M' ? 'Masculino' : 'Femenino'
+              this.acreditacionAgricultor = resp.estadoAcreditacion ? 'Acreditado' : 'No acreditado'
+              this.informacionAgricultorOk = true
+              this.identificadorOk.emit({ id: this.identificador, nombreUsuario: this.nombreAgricultor, mostrarCampos });
+              this.identificador = formatRut(resp.rut);
+              this.mostrarCamposAgricultor = mostrarCampos;
+            }
+          })
         }
       })
+      return;
     }
     if (this.tipoAgricultor.idTipoUsuario === 3 && !this.esEditar) {
       this.demandaService.getGrupoInformal(this.identificador).subscribe({
@@ -172,10 +182,10 @@ export class IdentificacionAgricultoresComponent implements OnInit{
           this.nombreRepresentanteAgricultor = resp.representante
           this.informacionAgricultorOk = true
           this.identificadorOk.emit({ id: this.identificador, nombreUsuario: this.nombreRepresentanteAgricultor, mostrarCampos });
+          this.mostrarCamposAgricultor = mostrarCampos;
         }
       })
     }
-    this.mostrarCamposAgricultor = mostrarCampos;
   }
 
   private camposEdicion(): void {
