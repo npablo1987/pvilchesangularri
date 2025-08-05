@@ -10,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { TableModule } from 'primeng/table';
 import { DividerModule } from 'primeng/divider';
 import { formatRut } from '../../../utils/formatters';
-import { esRutValido } from '../../../utils/validaciones';
+import { esRutValido, limpiarRut } from '../../../utils/validaciones';
 
 @Component({
   selector: 'app-identificacion-agricultores',
@@ -206,13 +206,15 @@ export class IdentificacionAgricultoresComponent implements OnInit{
   }
 
   onIdentificadorChange(val: string) {
-    this.identificador = formatRut(val);
-    this.rutIdentificadorValido = esRutValido(val);
+    const cleanValue = limpiarRut(val);
+    this.identificador = cleanValue ? formatRut(cleanValue) : '';
+    this.rutIdentificadorValido = esRutValido(cleanValue);
   }
 
   onRutRepresentanteChange(val: string) {
-    this.rutRepresentanteLegal = formatRut(val);
-    this.rutRepresentanteLegalValido = esRutValido(val);
+    const cleanValue = limpiarRut(val);
+    this.rutRepresentanteLegal = cleanValue ? formatRut(cleanValue) : '';
+    this.rutRepresentanteLegalValido = esRutValido(cleanValue);
   }
 
 }

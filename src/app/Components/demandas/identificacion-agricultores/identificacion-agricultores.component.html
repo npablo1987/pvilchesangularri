@@ -13,7 +13,10 @@
         [placeholder]="'12.345.678-9'"
         [(value)]="identificador"
         (valueChange)="onIdentificadorChange($event)"
-      [ngClass]="rutIdentificadorValido ? 'input-success':'input-error'"
+        [ngClass]="{
+          'input-success': rutIdentificadorValido,
+          'input-error': identificador && !rutIdentificadorValido
+        }"
       [disable]="false"
       [label]="'RUT'"
       [inputId]="'rutInput'"
@@ -40,7 +43,10 @@
         [placeholder]="''"
         [(value)]="rutRepresentanteLegal"
         (valueChange)="onRutRepresentanteChange($event)"
-      [ngClass]="rutRepresentanteLegalValido ? 'input-success':'input-error'"
+        [ngClass]="{
+          'input-success': rutRepresentanteLegalValido,
+          'input-error': rutRepresentanteLegal && !rutRepresentanteLegalValido
+        }"
       [disable]="false"
       [label]="'Rut Representante Legal'"
       [inputId]="'rutRepresentanteLegal'"
