@@ -12,9 +12,10 @@ export class ButtonsComponent {
   @Input() label: string = '';
   @Input() icon: string = '';
   @Input() action!: () => void;
+  @Input() disable: boolean = false;
 
   onClick() {
-    if (this.action) {
+    if (!this.disable && this.action) {
       this.action();
     }
   }
