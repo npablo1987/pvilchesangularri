@@ -32,6 +32,10 @@ export class DemandaService {
     return this.http.get<PersonaNatural>(`${this.apiUrl}/agricultores/personaNatural/${rut}`, { headers: this.getHeaders() });
   }
 
+  estaFallecido(rut: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}/agricultores/estaFallecido/${rut}`, { headers: this.getHeaders() });
+  }
+
   getPersonaJuridica(rut: string): Observable<PersonaJuridica> {
     return this.http.get<PersonaJuridica>(`${this.apiUrl}/agricultores/personaJuridica/${rut}`, { headers: this.getHeaders() });
   }
